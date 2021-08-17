@@ -60,4 +60,18 @@ class User
     client.query("INSERT INTO users(username, email, bio) VALUES ('#{@username}', '#{@email}', '#{@bio}')")
     client.last_id
   end
+
+  def self.convert_sql_result_to_array(result)
+    users = []
+    result.each do |row|
+      user = User.new(
+        id: row['id'],
+        username: row['username'],
+        email: row['email'],
+        bio_desc: row['bio_desc']
+      )
+      users << user
+    end
+    users
+  end
 end

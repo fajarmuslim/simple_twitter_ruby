@@ -292,4 +292,29 @@ describe User do
       end
     end
   end
+
+  describe 'convert sql result' do
+    context '.convert_sql_result_to_array' do
+      it 'should return array' do
+        sql_result = [
+          { 'id' => 1, 'username' => 'andi', 'email' => 'andi@gmail.com', 'bio_desc' => 'andi si bolang' },
+          { 'id' => 2, 'username' => 'budi', 'email' => 'budi@gmail.com', 'bio_desc' => 'budi doremi' },
+        ]
+
+        expected_user_1 = User.new({ id: 1, username: 'andi', email: 'andi@gmail.com', bio_desc: 'andi si bolang' })
+        expected_user_2 = User.new({ id: 2, username: 'budi', email: 'budi@gmail.com', bio_desc: 'budi doremi' })
+
+        actual_array = User.convert_sql_result_to_array(sql_result)
+        expected_array = [expected_user_1, expected_user_2]
+
+        expect(expected_array.size).to eq(actual_array.size)
+        (0..expected_array.size - 1).each do |i|
+          expect(actual_array[i].id).to eq(expected_array[i].id)
+          expect(actual_array[i].username).to eq(expected_array[i].username)
+          expect(actual_array[i].email).to eq(expected_array[i].email)
+          expect(actual_array[i].bio).to eq(expected_array[i].bio)
+        end
+      end
+    end
+  end
 end
