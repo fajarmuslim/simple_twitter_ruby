@@ -20,6 +20,7 @@ class User
   def valid_username?
     return false unless @username.is_a? String
     return false if @username == ''
+    return false if @username.length > 255
 
     true
   end

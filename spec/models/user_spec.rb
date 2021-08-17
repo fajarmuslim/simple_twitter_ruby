@@ -96,6 +96,16 @@ describe User do
 
         expect(user.valid_username?).to be_falsey
       end
+
+      it 'should not valid exceed 255 character' do
+        params = {
+          username: 'a' * 256
+        }
+
+        user = User.new(params)
+
+        expect(user.valid_username?).to be_falsey
+      end
     end
   end
 end
