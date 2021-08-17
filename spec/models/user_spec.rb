@@ -31,7 +31,7 @@ describe User do
         }
 
         user = User.new(params)
-        puts user.valid_id?
+
         expect(user.valid_id?).to be_truthy
       end
 
@@ -41,7 +41,7 @@ describe User do
         }
 
         user = User.new(params)
-        puts user.valid_id?
+
         expect(user.valid_id?).to be_falsey
       end
 
@@ -51,7 +51,7 @@ describe User do
         }
 
         user = User.new(params)
-        puts user.valid_id?
+
         expect(user.valid_id?).to be_falsey
       end
 
@@ -61,8 +61,20 @@ describe User do
         }
 
         user = User.new(params)
-        puts user.valid_id?
+
         expect(user.valid_id?).to be_falsey
+      end
+    end
+
+    context '#username_valid?' do
+      it 'should valid username' do
+        params = {
+          username: 'fajar'
+        }
+
+        user = User.new(params)
+
+        expect(user.valid_username?).to be_truthy
       end
     end
   end

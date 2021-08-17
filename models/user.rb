@@ -16,4 +16,8 @@ class User
 
     true
   end
+
+  def valid_username?
+    true
+  end
 end
