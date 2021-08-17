@@ -67,6 +67,16 @@ describe User do
     end
 
     context '#username_valid?' do
+      it 'should not valid empty string' do
+        params = {
+          username: ''
+        }
+
+        user = User.new(params)
+
+        expect(user.valid_username?).to be_falsey
+      end
+
       it 'should valid username' do
         params = {
           username: 'fajar'

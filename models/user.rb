@@ -18,6 +18,8 @@ class User
   end
 
   def valid_username?
+    return false if @username == ''
+
     true
   end
 end
