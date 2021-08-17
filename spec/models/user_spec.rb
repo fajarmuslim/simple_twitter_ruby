@@ -295,7 +295,7 @@ describe User do
 
   describe 'convert sql result' do
     context '.convert_sql_result_to_array' do
-      it 'should return array' do
+      it 'should return filled array' do
         sql_result = [
           { 'id' => 1, 'username' => 'andi', 'email' => 'andi@gmail.com', 'bio_desc' => 'andi si bolang' },
           { 'id' => 2, 'username' => 'budi', 'email' => 'budi@gmail.com', 'bio_desc' => 'budi doremi' },
@@ -314,6 +314,15 @@ describe User do
           expect(actual_array[i].email).to eq(expected_array[i].email)
           expect(actual_array[i].bio).to eq(expected_array[i].bio)
         end
+      end
+
+      it 'should return empty array' do
+        sql_result = nil
+
+        actual_array = User.convert_sql_result_to_array(sql_result)
+        expected_array = []
+
+        expect(expected_array.size).to eq(actual_array.size)
       end
     end
   end

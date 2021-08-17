@@ -61,9 +61,11 @@ class User
     client.last_id
   end
 
-  def self.convert_sql_result_to_array(result)
+  def self.convert_sql_result_to_array(sql_result)
     users = []
-    result.each do |row|
+    return users if sql_result.nil?
+
+    sql_result.each do |row|
       user = User.new(
         id: row['id'],
         username: row['username'],
