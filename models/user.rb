@@ -9,4 +9,8 @@ class User
     @posts = []
     @comments = []
   end
+
+  def valid_id?
+    return false if @id.negative?
+  end
 end
