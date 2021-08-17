@@ -111,12 +111,22 @@ describe User do
     context '#valid_email?' do
       it 'should valid email' do
         params = {
-          username: 'fajarmuslim@domain.com'
+          email: 'fajarmuslim@domain.com'
         }
 
         user = User.new(params)
 
         expect(user.valid_email?).to be_truthy
+      end
+
+      it 'should invalid empty string' do
+        params = {
+          email: ''
+        }
+
+        user = User.new(params)
+
+        expect(user.valid_email?).to be_falsey
       end
     end
   end

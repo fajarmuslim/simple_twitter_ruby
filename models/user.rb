@@ -26,6 +26,8 @@ class User
   end
 
   def valid_email?
+    return false if @email == ''
+
     true
   end
 end
