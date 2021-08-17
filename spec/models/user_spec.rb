@@ -220,12 +220,24 @@ describe User do
       params = {
         username: 'fajar',
         email: 'fajar@domain.com',
-        bio: 'fajar bio',
+        bio: 'fajar bio'
       }
 
       user = User.new(params)
 
       expect(user.valid_save?).to be_truthy
+    end
+
+    it 'should invalid save' do
+      params = {
+        username: 'fajar',
+        email: 'domain.com',
+        bio: 'fajar bio'
+      }
+
+      user = User.new(params)
+
+      expect(user.valid_save?).to be_falsey
     end
   end
 end
