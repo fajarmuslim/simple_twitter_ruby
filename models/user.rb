@@ -85,6 +85,7 @@ class User
 
   def self.find_by_id(id)
     client = create_db_client
-    client.query("SELECT * FROM users WHERE id = #{id}")
+    sql_result = client.query("SELECT * FROM users WHERE id = #{id}")
+    convert_sql_result_to_array(sql_result)[0]
   end
 end

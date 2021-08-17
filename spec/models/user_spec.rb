@@ -380,7 +380,23 @@ describe User do
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
 
         expect(mock_client).to receive(:query).with("SELECT * FROM users WHERE id = #{id}")
-        User.find_by_id(id)
+        expect(User.find_by_id(id)).to eq(nil)
+      end
+
+      it 'should get data from db' do
+        params = {
+          username: 'fajar1',
+          email: 'fajar1@domain.com',
+          bio: 'fajar1 bio'
+        }
+
+        user = User.new(params)
+        user.save
+
+        result = User.find_by_id(1)
+        expect(result.username).to eq(params[:username])
+        expect(result.email).to eq(params[:email])
+        expect(result.bio).to eq(params[:bio])
       end
     end
   end
