@@ -326,4 +326,16 @@ describe User do
       end
     end
   end
+
+  describe 'read' do
+    context '#find_all' do
+      it 'should receive correct query' do
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+
+        expect(mock_client).to receive(:query).with('SELECT * FROM users')
+        expect(User.find_all).to eq([])
+      end
+    end
+  end
 end
