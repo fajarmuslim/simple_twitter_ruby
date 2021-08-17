@@ -128,6 +128,16 @@ describe User do
 
         expect(user.valid_email?).to be_falsey
       end
+
+      it 'should invalid type not string string' do
+        params = {
+          email: 1
+        }
+
+        user = User.new(params)
+
+        expect(user.valid_email?).to be_falsey
+      end
     end
   end
 end

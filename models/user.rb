@@ -26,6 +26,7 @@ class User
   end
 
   def valid_email?
+    return false unless @email.is_a? String
     return false if @email == ''
 
     true
