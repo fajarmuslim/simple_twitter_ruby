@@ -39,6 +39,8 @@ class User
   end
 
   def valid_bio?
+    return false unless @bio.is_a? String
+
     true
   end
 end

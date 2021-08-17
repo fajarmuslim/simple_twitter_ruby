@@ -192,6 +192,16 @@ describe User do
 
         expect(user.valid_bio?).to be_truthy
       end
+
+      it 'should invalid not string' do
+        params = {
+          bio: 1
+        }
+
+        user = User.new(params)
+
+        expect(user.valid_bio?).to be_falsey
+      end
     end
   end
 end
