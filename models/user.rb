@@ -37,4 +37,8 @@ class User
   def valid_email_pattern?
     @email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   end
+
+  def valid_bio?
+    true
+  end
 end

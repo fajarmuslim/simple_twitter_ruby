@@ -181,5 +181,17 @@ describe User do
         expect(user.valid_email_pattern?).to be_falsey
       end
     end
+
+    context '#valid_bio?' do
+      it 'should valid bio' do
+        params = {
+          bio: 'bio description'
+        }
+
+        user = User.new(params)
+
+        expect(user.valid_bio?).to be_truthy
+      end
+    end
   end
 end
