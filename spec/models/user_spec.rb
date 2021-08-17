@@ -25,6 +25,16 @@ describe User do
 
   describe 'validity' do
     context '#id_valid?' do
+      it 'should valid positive integer' do
+        params = {
+          id: 1
+        }
+
+        user = User.new(params)
+        puts user.valid_id?
+        expect(user.valid_id?).to be_truthy
+      end
+
       it 'should not valid negative integer' do
         params = {
           id: -1
