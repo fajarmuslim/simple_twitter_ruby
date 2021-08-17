@@ -24,4 +24,8 @@ class User
 
     true
   end
+
+  def valid_email?
+    true
+  end
 end
