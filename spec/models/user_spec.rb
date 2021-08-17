@@ -1,6 +1,7 @@
 require_relative '../../models/user'
 
 describe User do
+  $client = create_db_client
   describe 'initialize' do
     context '.new' do
       it 'should create object' do
@@ -242,6 +243,16 @@ describe User do
   end
 
   describe 'create' do
+    before(:each) do
+      $client.query('SET FOREIGN_KEY_CHECKS = 0')
+      $client.query('TRUNCATE table users')
+    end
+
+    after(:each) do
+      $client.query('TRUNCATE table users')
+      $client.query('SET FOREIGN_KEY_CHECKS = 1')
+    end
+
     context '#save' do
       it 'should receive correct query' do
         params = {
@@ -258,6 +269,26 @@ describe User do
 
         expect(mock_client).to receive(:query).with("INSERT INTO users(username, email, bio) VALUES ('#{user.username}', '#{user.email}', '#{user.bio}')")
         expect(user.save).not_to be_nil
+      end
+
+      it 'should save data to db' do
+        params = {
+          username: 'fajar',
+          email: 'fajar@domain.com',
+          bio: 'fajar bio'
+        }
+
+        user = User.new(params)
+        user.save
+
+        result = $client.query('SELECT * FROM users')
+        expect(result.size).to eq(1)
+
+        saved_user = result.first
+
+        expect(saved_user['username']).to eq(params[:username])
+        expect(saved_user['email']).to eq(params[:email])
+        expect(saved_user['bio']).to eq(params[:bio])
       end
     end
   end
