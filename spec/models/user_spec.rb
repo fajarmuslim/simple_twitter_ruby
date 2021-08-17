@@ -44,6 +44,16 @@ describe User do
         puts user.valid_id?
         expect(user.valid_id?).to be_falsey
       end
+
+      it 'should not valid if type is not integer' do
+        params = {
+          id: 'aaa'
+        }
+
+        user = User.new(params)
+        puts user.valid_id?
+        expect(user.valid_id?).to be_falsey
+      end
     end
   end
 end

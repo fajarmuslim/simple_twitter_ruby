@@ -11,6 +11,7 @@ class User
   end
 
   def valid_id?
-    return false if @id.negative? || @id == 0
+    return false unless @id.is_a? Integer
+    return false if @id.negative? || @id.zero?
   end
 end
