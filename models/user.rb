@@ -40,6 +40,7 @@ class User
 
   def valid_bio?
     return false unless @bio.is_a? String
+    return false if @bio.length > 1000
 
     true
   end

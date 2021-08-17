@@ -202,6 +202,16 @@ describe User do
 
         expect(user.valid_bio?).to be_falsey
       end
+
+      it 'should invalid exceed 1000 char' do
+        params = {
+          bio: 'a' * 1001
+        }
+
+        user = User.new(params)
+
+        expect(user.valid_bio?).to be_falsey
+      end
     end
   end
 end
