@@ -35,7 +35,7 @@ describe User do
         expect(user.valid_id?).to be_truthy
       end
 
-      it 'should not valid negative integer' do
+      it 'should invalid negative integer' do
         params = {
           id: -1
         }
@@ -45,7 +45,7 @@ describe User do
         expect(user.valid_id?).to be_falsey
       end
 
-      it 'should not valid nol integer' do
+      it 'should invalid nol integer' do
         params = {
           id: 0
         }
@@ -55,7 +55,7 @@ describe User do
         expect(user.valid_id?).to be_falsey
       end
 
-      it 'should not valid if type is not integer' do
+      it 'should invalid if type is not integer' do
         params = {
           id: 'aaa'
         }
@@ -77,7 +77,7 @@ describe User do
         expect(user.valid_username?).to be_truthy
       end
 
-      it 'should not valid empty string' do
+      it 'should invalid empty string' do
         params = {
           username: ''
         }
@@ -87,7 +87,7 @@ describe User do
         expect(user.valid_username?).to be_falsey
       end
 
-      it 'should not valid type not string' do
+      it 'should invalid type not string' do
         params = {
           username: 1
         }
@@ -97,7 +97,7 @@ describe User do
         expect(user.valid_username?).to be_falsey
       end
 
-      it 'should not valid exceed 255 character' do
+      it 'should invalid exceed 255 character' do
         params = {
           username: 'a' * 256
         }
