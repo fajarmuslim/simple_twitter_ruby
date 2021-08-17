@@ -28,6 +28,7 @@ class User
   def valid_email?
     return false unless @email.is_a? String
     return false if @email == ''
+    return false if @email.length > 255
 
     true
   end
