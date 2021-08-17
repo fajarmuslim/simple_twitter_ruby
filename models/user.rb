@@ -32,4 +32,8 @@ class User
 
     true
   end
+
+  def valid_email_pattern?
+    @email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  end
 end
