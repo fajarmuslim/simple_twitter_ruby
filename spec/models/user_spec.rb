@@ -240,4 +240,25 @@ describe User do
       expect(user.valid_save?).to be_falsey
     end
   end
+
+  describe 'create' do
+    context '#save' do
+      it 'should receive correct query' do
+        params = {
+          username: 'fajar',
+          email: 'fajar@domain.com',
+          bio: 'fajar bio'
+        }
+
+        user = User.new(params)
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        allow(mock_client).to receive(:last_id).and_return(1)
+
+        expect(mock_client).to receive(:query).with("INSERT INTO users(username, email, bio) VALUES ('#{user.username}', '#{user.email}', '#{user.bio}')")
+        expect(user.save).not_to be_nil
+      end
+    end
+  end
 end

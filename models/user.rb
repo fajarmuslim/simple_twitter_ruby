@@ -1,3 +1,7 @@
+require_relative '../db/mysql_connector'
+
+$client = create_db_client
+
 class User
   attr_accessor :id, :username, :email, :bio, :posts, :comments
 
@@ -47,5 +51,13 @@ class User
 
   def valid_save?
     valid_username? and valid_email? and valid_bio?
+  end
+
+  def save
+    return false unless valid_save?
+
+    client = create_db_client
+    client.query("INSERT INTO users(username, email, bio) VALUES ('#{@username}', '#{@email}', '#{@bio}')")
+    client.last_id
   end
 end
