@@ -214,4 +214,18 @@ describe User do
       end
     end
   end
+
+  context '#valid_save?' do
+    it 'should valid save' do
+      params = {
+        username: 'fajar',
+        email: 'fajar@domain.com',
+        bio: 'fajar bio',
+      }
+
+      user = User.new(params)
+
+      expect(user.valid_save?).to be_truthy
+    end
+  end
 end

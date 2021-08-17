@@ -44,4 +44,8 @@ class User
 
     true
   end
+
+  def valid_save?
+    valid_username? and valid_email? and valid_bio?
+  end
 end
