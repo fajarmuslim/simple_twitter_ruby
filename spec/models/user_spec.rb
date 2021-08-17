@@ -371,5 +371,17 @@ describe User do
       expect(result_2.email).to eq(params_2[:email])
       expect(result_2.bio).to eq(params_2[:bio])
     end
+
+    context '#find_by_id' do
+      it 'should receive correct query' do
+        id = 1
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+
+        expect(mock_client).to receive(:query).with("SELECT * FROM users WHERE id = #{id}")
+        User.find_by_id(id)
+      end
+    end
   end
 end
