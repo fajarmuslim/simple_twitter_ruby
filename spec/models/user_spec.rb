@@ -160,6 +160,16 @@ describe User do
 
         expect(user.valid_email_pattern?).to be_truthy
       end
+
+      it 'should not valid email pattern' do
+        params = {
+          email: '@domain.com'
+        }
+
+        user = User.new(params)
+
+        expect(user.valid_email_pattern?).to be_falsey
+      end
     end
   end
 end
