@@ -70,7 +70,7 @@ class User
         id: row['id'],
         username: row['username'],
         email: row['email'],
-        bio_desc: row['bio_desc']
+        bio: row['bio']
       )
       users << user
     end

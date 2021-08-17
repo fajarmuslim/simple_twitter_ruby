@@ -328,6 +328,10 @@ describe User do
   end
 
   describe 'read' do
+    before(:each) do
+      $client.query('SET FOREIGN_KEY_CHECKS = 0')
+      $client.query('TRUNCATE table users')
+    end
     context '#find_all' do
       it 'should receive correct query' do
         mock_client = double
@@ -336,6 +340,39 @@ describe User do
         expect(mock_client).to receive(:query).with('SELECT * FROM users')
         expect(User.find_all).to eq([])
       end
+    end
+
+    it 'should get data from db' do
+      params_1 = {
+        username: 'fajar1',
+        email: 'fajar1@domain.com',
+        bio: 'fajar1 bio'
+      }
+
+      user_1 = User.new(params_1)
+      user_1.save
+
+      params_2 = {
+        username: 'fajar2',
+        email: 'fajar2@domain.com',
+        bio: 'fajar2 bio'
+      }
+
+      user_2 = User.new(params_2)
+      user_2.save
+
+      result = User.find_all
+      expect(result.size).to eq(2)
+
+      result_1 = result[0]
+      expect(result_1.username).to eq(params_1[:username])
+      expect(result_1.email).to eq(params_1[:email])
+      expect(result_1.bio).to eq(params_1[:bio])
+
+      result_2 = result[1]
+      expect(result_2.username).to eq(params_2[:username])
+      expect(result_2.email).to eq(params_2[:email])
+      expect(result_2.bio).to eq(params_2[:bio])
     end
   end
 end
