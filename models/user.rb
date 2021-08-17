@@ -18,6 +18,7 @@ class User
   end
 
   def valid_username?
+    return false unless @username.is_a? String
     return false if @username == ''
 
     true

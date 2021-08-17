@@ -66,27 +66,35 @@ describe User do
       end
     end
 
-    describe '#username_valid?' do
-      context '#username_valid?' do
-        it 'should not valid empty string' do
-          params = {
-            username: ''
-          }
+    context '#username_valid?' do
+      it 'should valid username' do
+        params = {
+          username: 'fajar'
+        }
 
-          user = User.new(params)
+        user = User.new(params)
 
-          expect(user.valid_username?).to be_falsey
-        end
+        expect(user.valid_username?).to be_truthy
+      end
 
-        it 'should valid username' do
-          params = {
-            username: 'fajar'
-          }
+      it 'should not valid empty string' do
+        params = {
+          username: ''
+        }
 
-          user = User.new(params)
+        user = User.new(params)
 
-          expect(user.valid_username?).to be_truthy
-        end
+        expect(user.valid_username?).to be_falsey
+      end
+
+      it 'should not valid type not string' do
+        params = {
+          username: 1
+        }
+
+        user = User.new(params)
+
+        expect(user.valid_username?).to be_falsey
       end
     end
   end
