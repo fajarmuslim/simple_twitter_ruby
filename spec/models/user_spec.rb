@@ -24,7 +24,7 @@ describe User do
   end
 
   describe 'validity' do
-    context '#id_valid?' do
+    context '#valid_id?' do
       it 'should valid positive integer' do
         params = {
           id: 1
@@ -66,7 +66,7 @@ describe User do
       end
     end
 
-    context '#username_valid?' do
+    context '#valid_username?' do
       it 'should valid username' do
         params = {
           username: 'fajar'
