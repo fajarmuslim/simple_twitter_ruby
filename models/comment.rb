@@ -12,7 +12,7 @@ class Comment
   end
 
   def valid_id?
-    return false if @id.negative?
+    return false if @id.negative? || @id.zero?
 
     true
   end

@@ -44,6 +44,16 @@ describe Comment do
 
         expect(comment.valid_id?).to be_falsey
       end
+
+      it 'should invalid nol integer' do
+        params = {
+          id: 0
+        }
+
+        comment = Comment.new(params)
+
+        expect(comment.valid_id?).to be_falsey
+      end
     end
   end
 end
