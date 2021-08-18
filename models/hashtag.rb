@@ -5,4 +5,8 @@ class Hashtag
     @id= params[:id]
     @text= params[:text]
   end
+
+  def valid_id?
+    true
+  end
 end

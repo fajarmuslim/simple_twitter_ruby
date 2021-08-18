@@ -16,4 +16,18 @@ describe Hashtag do
       end
     end
   end
+
+  describe 'validity' do
+    context '#valid_id?' do
+      it 'should valid positive integer' do
+        params = {
+          id: 1
+        }
+
+        hashtag = Hashtag.new(params)
+
+        expect(hashtag.valid_id?).to be_truthy
+      end
+    end
+  end
 end
