@@ -1,6 +1,18 @@
 require_relative '../../models/hashtag'
 
 describe Hashtag do
+  $client = create_db_client
+
+  before(:each) do
+    $client.query('SET FOREIGN_KEY_CHECKS = 0')
+    $client.query('TRUNCATE table hashtags')
+  end
+
+  after(:all) do
+    $client.query('TRUNCATE table hashtags')
+    $client.query('SET FOREIGN_KEY_CHECKS = 1')
+  end
+
   describe 'initialize' do
     context '.new' do
       it 'should create object' do
@@ -168,9 +180,26 @@ describe Hashtag do
 
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        allow(mock_client).to receive(:last_id).and_return(1)
 
         expect(mock_client).to receive(:query).with("INSERT INTO hashtags(text) VALUES ('#{hashtag.text}')")
+        expect(hashtag.save).not_to be_nil
+      end
+
+      it 'should save data to db' do
+        params = {
+          text: 'fajar'
+        }
+
+        hashtag = Hashtag.new(params)
         hashtag.save
+
+        result = $client.query('SELECT * FROM hashtags')
+        expect(result.size).to eq(1)
+
+        saved_hashtag = result.first
+
+        expect(saved_hashtag['text']).to eq(params[:text])
       end
     end
   end

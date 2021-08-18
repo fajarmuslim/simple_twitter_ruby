@@ -46,5 +46,6 @@ class Hashtag
 
     client = create_db_client
     client.query("INSERT INTO hashtags(text) VALUES ('#{@text}')")
+    client.last_id
   end
 end
