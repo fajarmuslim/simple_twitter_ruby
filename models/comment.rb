@@ -26,6 +26,7 @@ class Comment
   end
 
   def valid_post_id?
+    return false unless @post_id.is_a? Integer
     return false if @post_id.negative? || @post_id.zero?
 
     true
