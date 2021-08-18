@@ -15,7 +15,8 @@ class Hashtag
 
   def valid_text?
     return false unless @text.is_a? String
-    return false if @text.length.zero?
+    return false if @text == ''
+    return false if @text.length > 999
 
     true
   end

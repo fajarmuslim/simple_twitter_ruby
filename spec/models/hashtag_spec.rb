@@ -91,5 +91,15 @@ describe Hashtag do
 
       expect(hashtag.valid_text?).to be_falsey
     end
+
+    it 'should invalid exceed 999 character' do
+      params = {
+        text: 'a' * 1000
+      }
+
+      hashtag = Hashtag.new(params)
+
+      expect(hashtag.valid_text?).to be_falsey
+    end
   end
 end
