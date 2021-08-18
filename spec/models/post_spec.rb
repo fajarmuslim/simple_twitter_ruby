@@ -21,9 +21,9 @@ describe Post do
       it 'should create object' do
         params = {
           id: 1,
-          user_id: 'andi',
-          text: 'andi@gmail.com',
-          attachment_path: 'andi si bolang'
+          user_id: 1,
+          text: 'post text #gigih',
+          attachment_path: '/public/aaa.png'
         }
 
         post = Post.new(params)
