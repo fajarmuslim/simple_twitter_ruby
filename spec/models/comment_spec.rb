@@ -65,5 +65,17 @@ describe Comment do
         expect(comment.valid_id?).to be_falsey
       end
     end
+
+    context '#valid_user_id?' do
+      it 'should valid user_id' do
+        params = {
+          user_id: 1
+        }
+
+        comment = Comment.new(params)
+
+        expect(comment.valid_user_id?).to be_truthy
+      end
+    end
   end
 end
