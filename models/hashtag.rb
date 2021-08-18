@@ -1,3 +1,5 @@
+require_relative '../db/mysql_connector'
+
 class Hashtag
   attr_reader :id, :text
 
@@ -37,5 +39,12 @@ class Hashtag
       hashtags << hashtag
     end
     hashtags
+  end
+
+  def save
+    return false unless valid_save?
+
+    client = create_db_client
+    client.query("INSERT INTO hashtags(text) VALUES ('#{@text}')")
   end
 end

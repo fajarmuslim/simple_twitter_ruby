@@ -156,4 +156,22 @@ describe Hashtag do
       end
     end
   end
+
+  describe 'create' do
+    context '#save' do
+      it 'should receive correct query' do
+        params = {
+          text: 'fajar'
+        }
+
+        hashtag = Hashtag.new(params)
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+
+        expect(mock_client).to receive(:query).with("INSERT INTO hashtags(text) VALUES ('#{hashtag.text}')")
+        hashtag.save
+      end
+    end
+  end
 end
