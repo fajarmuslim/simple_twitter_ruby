@@ -60,4 +60,16 @@ describe Hashtag do
       expect(hashtag.valid_id?).to be_falsey
     end
   end
+
+  context '#valid_text?' do
+    it 'should valid text' do
+      params = {
+        text: 'ppkm'
+      }
+
+      hashtag = Hashtag.new(params)
+
+      expect(hashtag.valid_text?).to be_truthy
+    end
+  end
 end

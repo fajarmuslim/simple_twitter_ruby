@@ -12,4 +12,8 @@ class Hashtag
 
     true
   end
+
+  def valid_text?
+    true
+  end
 end
