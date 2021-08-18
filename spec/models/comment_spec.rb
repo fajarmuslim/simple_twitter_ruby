@@ -219,4 +219,40 @@ describe Comment do
       end
     end
   end
+
+  describe 'convert sql result' do
+    context '.convert_sql_result_to_array' do
+      it 'should return filled array' do
+        sql_result = [
+          { 'id' => 1, 'user_id' => 1, 'post_id' => 1, 'attachment_path' => '/aaa', 'created_at' => '2021-08-18 19:31:56', 'updated_at' => '2021-08-18 19:31:56' },
+          { 'id' => 2, 'user_id' => 2, 'post_id' => 2,  'attachment_path' => '/bbb', 'created_at' => '2021-08-18 19:31:57', 'updated_at' => '2021-08-18 19:31:57' }
+        ]
+
+        expected_comment_1 = Comment.new({ id: 1, user_id: 1, post_id: 1, attachment_path: '/aaa', created_at: '2021-08-18 19:31:56', updated_at: '2021-08-18 19:31:56' })
+        expected_comment_2 = Comment.new({ id: 2, user_id: 2, post_id: 2, attachment_path: '/bbb', created_at: '2021-08-18 19:31:57', updated_at: '2021-08-18 19:31:57' })
+
+        actual_array = Comment.convert_sql_result_to_array(sql_result)
+        expected_array = [expected_comment_1, expected_comment_2]
+
+        expect(expected_array.size).to eq(actual_array.size)
+        (0..expected_array.size - 1).each do |i|
+          expect(actual_array[i].id).to eq(expected_array[i].id)
+          expect(actual_array[i].user_id).to eq(expected_array[i].user_id)
+          expect(actual_array[i].post_id).to eq(expected_array[i].post_id)
+          expect(actual_array[i].attachment_path).to eq(expected_array[i].attachment_path)
+          expect(actual_array[i].created_at).to eq(expected_array[i].created_at)
+          expect(actual_array[i].updated_at).to eq(expected_array[i].updated_at)
+        end
+      end
+
+      it 'should return empty array' do
+        sql_result = nil
+
+        actual_array = Comment.convert_sql_result_to_array(sql_result)
+        expected_array = []
+
+        expect(expected_array.size).to eq(actual_array.size)
+      end
+    end
+  end
 end

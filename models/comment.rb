@@ -43,4 +43,23 @@ class Comment
   def valid_save?
     valid_user_id? and valid_post_id? and valid_text?
   end
+
+  def self.convert_sql_result_to_array(sql_result)
+    comments = []
+    return comments if sql_result.nil?
+
+    sql_result.each do |row|
+      comment = Comment.new(
+        id: row['id'],
+        user_id: row['user_id'],
+        post_id: row['post_id'],
+        text: row['text'],
+        attachment_path: row['attachment_path'],
+        created_at: row['created_at'],
+        updated_at: row['updated_at']
+      )
+      comments << comment
+    end
+    comments
+  end
 end
