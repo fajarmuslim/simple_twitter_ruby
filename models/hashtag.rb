@@ -2,8 +2,8 @@ class Hashtag
   attr_reader :id, :text
 
   def initialize(params)
-    @id= params[:id]
-    @text= params[:text]
+    @id = params[:id]
+    @text = params[:text]
   end
 
   def valid_id?
@@ -23,5 +23,18 @@ class Hashtag
 
   def valid_save?
     valid_text?
+  end
+
+  def self.convert_sql_result_to_array(sql_result)
+    hashtags = []
+
+    sql_result.each do |row|
+      hashtag = Hashtag.new(
+        id: row['id'],
+        text: row['text']
+      )
+      hashtags << hashtag
+    end
+    hashtags
   end
 end

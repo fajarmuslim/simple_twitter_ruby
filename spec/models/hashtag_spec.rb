@@ -124,4 +124,27 @@ describe Hashtag do
       end
     end
   end
+
+  describe 'convert sql result' do
+    context '.convert_sql_result_to_array' do
+      it 'should return filled array' do
+        sql_result = [
+          { 'id' => 1, 'text' => 'aaa' },
+          { 'id' => 2, 'text' => 'bbb' }
+        ]
+
+        expected_hashtag_1 = Hashtag.new({ id: 1, text: 'aaa' })
+        expected_hashtag_2 = Hashtag.new({ id: 2, text: 'bbb' })
+
+        actual_array = Hashtag.convert_sql_result_to_array(sql_result)
+        expected_array = [expected_hashtag_1, expected_hashtag_2]
+
+        expect(expected_array.size).to eq(actual_array.size)
+        (0..expected_array.size - 1).each do |i|
+          expect(actual_array[i].id).to eq(expected_array[i].id)
+          expect(actual_array[i].text).to eq(expected_array[i].text)
+        end
+      end
+    end
+  end
 end
