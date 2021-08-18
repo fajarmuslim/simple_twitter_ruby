@@ -191,5 +191,32 @@ describe Comment do
         expect(comment.valid_text?).to be_falsey
       end
     end
+
+    context '#valid_save?' do
+      it 'should valid save' do
+        params = {
+          user_id: 1,
+          post_id: 1,
+          text: 'post text #gigih',
+          attachment_path: '/public/aaa.png'
+        }
+
+        comment = Comment.new(params)
+
+        expect(comment.valid_save?).to be_truthy
+      end
+
+      it 'should invalid save' do
+        params = {
+          user_id: 1,
+          text: 'post text #gigih',
+          attachment_path: '/public/aaa.png'
+        }
+
+        comment = Comment.new(params)
+
+        expect(comment.valid_save?).to be_falsey
+      end
+    end
   end
 end
