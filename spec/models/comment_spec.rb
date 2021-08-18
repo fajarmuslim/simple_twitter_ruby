@@ -354,7 +354,7 @@ describe Comment do
 
         result_1 = result[0]
         expect(result_1.user_id).to eq(params_1[:user_id])
-        expect(result_1.post_id).to eq(params_2[:post_id])
+        expect(result_1.post_id).to eq(params_1[:post_id])
         expect(result_1.text).to eq(params_1[:text])
         expect(result_1.attachment_path).to eq(params_1[:attachment_path])
 
@@ -363,6 +363,36 @@ describe Comment do
         expect(result_2.post_id).to eq(params_2[:post_id])
         expect(result_2.text).to eq(params_2[:text])
         expect(result_2.attachment_path).to eq(params_2[:attachment_path])
+      end
+    end
+
+    context '#find_by_id' do
+      it 'should receive correct query' do
+        id = 1
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+
+        expect(mock_client).to receive(:query).with("SELECT * FROM comments WHERE id = #{id}")
+        expect(Comment.find_by_id(id)).to eq(nil)
+      end
+
+      it 'should get data from db' do
+        params = {
+          user_id: 1,
+          post_id: 1,
+          text: 'comment text #gigih',
+          attachment_path: '/public/aaa.png'
+        }
+
+        comment = Comment.new(params)
+        comment.save
+
+        result = Comment.find_by_id(1)
+        expect(result.user_id).to eq(params[:user_id])
+        expect(result.post_id).to eq(params[:post_id])
+        expect(result.text).to eq(params[:text])
+        expect(result.attachment_path).to eq(params[:attachment_path])
       end
     end
   end
