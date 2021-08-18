@@ -16,4 +16,8 @@ class Post
 
     true
   end
+
+  def valid_user_id?
+    true
+  end
 end

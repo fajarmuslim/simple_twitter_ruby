@@ -63,5 +63,17 @@ describe Post do
         expect(post.valid_id?).to be_falsey
       end
     end
+
+    context '#valid_user_id?' do
+      it 'should valid user_id' do
+        params = {
+          user_id: 1
+        }
+
+        post = Post.new(params)
+
+        expect(post.valid_user_id?).to be_truthy
+      end
+    end
   end
 end
