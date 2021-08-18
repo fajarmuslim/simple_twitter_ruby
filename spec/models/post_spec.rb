@@ -136,6 +136,16 @@ describe Post do
 
         expect(post.valid_text?).to be_falsey
       end
+
+      it 'should invalid exceed 1000 character' do
+        params = {
+          text: 'a' * 1001
+        }
+
+        post = Post.new(params)
+
+        expect(post.valid_text?).to be_falsey
+      end
     end
   end
 end
