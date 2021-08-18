@@ -19,6 +19,8 @@ class Comment
   end
 
   def valid_user_id?
+    return false if @user_id.negative?
+
     true
   end
 end
