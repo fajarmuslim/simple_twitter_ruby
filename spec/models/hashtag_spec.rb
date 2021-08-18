@@ -145,6 +145,15 @@ describe Hashtag do
           expect(actual_array[i].text).to eq(expected_array[i].text)
         end
       end
+
+      it 'should return empty array' do
+        sql_result = nil
+
+        actual_array = Hashtag.convert_sql_result_to_array(sql_result)
+        expected_array = []
+
+        expect(expected_array).to eq(actual_array)
+      end
     end
   end
 end

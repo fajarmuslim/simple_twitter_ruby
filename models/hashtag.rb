@@ -27,6 +27,7 @@ class Hashtag
 
   def self.convert_sql_result_to_array(sql_result)
     hashtags = []
+    return hashtags if sql_result.nil?
 
     sql_result.each do |row|
       hashtag = Hashtag.new(
