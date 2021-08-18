@@ -32,6 +32,16 @@ describe Post do
 
         expect(post.valid_id?).to be_truthy
       end
+
+      it 'should invalid negative integer' do
+        params = {
+          id: -1
+        }
+
+        post = Post.new(params)
+
+        expect(post.valid_id?).to be_falsey
+      end
     end
   end
 end

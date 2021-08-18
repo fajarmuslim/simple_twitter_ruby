@@ -11,6 +11,8 @@ class Post
   end
 
   def valid_id?
+    return false if @id.negative?
+
     true
   end
 end
