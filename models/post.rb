@@ -25,6 +25,8 @@ class Post
   end
 
   def valid_text?
+    return false if @text ==''
+
     true
   end
 end

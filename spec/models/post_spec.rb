@@ -116,6 +116,16 @@ describe Post do
 
         expect(post.valid_text?).to be_truthy
       end
+
+      it 'should invalid empty string' do
+        params = {
+          text: ''
+        }
+
+        post = Post.new(params)
+
+        expect(post.valid_text?).to be_falsey
+      end
     end
   end
 end
