@@ -7,6 +7,7 @@ class Hashtag
   end
 
   def valid_id?
+    return false unless @id.is_a? Integer
     return false if @id.negative? || @id.zero?
 
     true

@@ -49,5 +49,15 @@ describe Hashtag do
 
       expect(hashtag.valid_id?).to be_falsey
     end
+
+    it 'should invalid if type is not integer' do
+      params = {
+        id: 'aaa'
+      }
+
+      hashtag = Hashtag.new(params)
+
+      expect(hashtag.valid_id?).to be_falsey
+    end
   end
 end
