@@ -118,36 +118,36 @@ describe Comment do
 
         expect(comment.valid_post_id?).to be_truthy
       end
-    end
 
-    it 'should invalid negative integer' do
-      params = {
-        post_id: -1
-      }
+      it 'should invalid negative integer' do
+        params = {
+          post_id: -1
+        }
 
-      comment = Comment.new(params)
+        comment = Comment.new(params)
 
-      expect(comment.valid_post_id?).to be_falsey
-    end
+        expect(comment.valid_post_id?).to be_falsey
+      end
 
-    it 'should invalid nol integer' do
-      params = {
-        post_id: 0
-      }
+      it 'should invalid nol integer' do
+        params = {
+          post_id: 0
+        }
 
-      comment = Comment.new(params)
+        comment = Comment.new(params)
 
-      expect(comment.valid_post_id?).to be_falsey
-    end
+        expect(comment.valid_post_id?).to be_falsey
+      end
 
-    it 'should invalid if type is not integer' do
-      params = {
-        post_id: 'aaa'
-      }
+      it 'should invalid if type is not integer' do
+        params = {
+          post_id: 'aaa'
+        }
 
-      comment = Comment.new(params)
+        comment = Comment.new(params)
 
-      expect(comment.valid_post_id?).to be_falsey
+        expect(comment.valid_post_id?).to be_falsey
+      end
     end
   end
 end
