@@ -178,12 +178,12 @@ describe Post do
     context '.convert_sql_result_to_array' do
       it 'should return filled array' do
         sql_result = [
-          { 'id' => 1, 'user_id' => 1, 'attachment_path' => '/aaa', 'created_at' => '2021-08-18 19:31:56', 'updated_at' =>'2021-08-18 19:31:56' },
-          { 'id' => 2, 'user_id' => 2, 'attachment_path' => '/bbb', 'created_at' => '2021-08-18 19:31:57', 'updated_at' =>'2021-08-18 19:31:57' }
+          { 'id' => 1, 'user_id' => 1, 'attachment_path' => '/aaa', 'created_at' => '2021-08-18 19:31:56', 'updated_at' => '2021-08-18 19:31:56' },
+          { 'id' => 2, 'user_id' => 2, 'attachment_path' => '/bbb', 'created_at' => '2021-08-18 19:31:57', 'updated_at' => '2021-08-18 19:31:57' }
         ]
 
-        expected_post_1 = Post.new({id: 1, user_id: 1, attachment_path: '/aaa', created_at: '2021-08-18 19:31:56', updated_at:'2021-08-18 19:31:56'})
-        expected_post_2 = Post.new({id: 2, user_id: 2, attachment_path: '/bbb', created_at: '2021-08-18 19:31:57', updated_at:'2021-08-18 19:31:57'})
+        expected_post_1 = Post.new({ id: 1, user_id: 1, attachment_path: '/aaa', created_at: '2021-08-18 19:31:56', updated_at: '2021-08-18 19:31:56' })
+        expected_post_2 = Post.new({ id: 2, user_id: 2, attachment_path: '/bbb', created_at: '2021-08-18 19:31:57', updated_at: '2021-08-18 19:31:57' })
 
         actual_array = Post.convert_sql_result_to_array(sql_result)
         expected_array = [expected_post_1, expected_post_2]
@@ -205,6 +205,26 @@ describe Post do
         expected_array = []
 
         expect(expected_array.size).to eq(actual_array.size)
+      end
+    end
+  end
+
+  describe 'create' do
+    context '#save' do
+      it 'should receive correct query' do
+        params = {
+          user_id: 1,
+          text: 'post text #gigih',
+          attachment_path: '/public/aaa.png'
+        }
+
+        post = Post.new(params)
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+
+        expect(mock_client).to receive(:query).with("INSERT INTO posts(user_id, text, attachment_path) VALUES ('#{post.user_id}', '#{post.text}', '#{post.attachment_path}')")
+        post.save
       end
     end
   end

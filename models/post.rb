@@ -1,3 +1,5 @@
+require_relative '../db/mysql_connector'
+
 class Post
   attr_reader :id, :user_id, :text, :attachment_path, :created_at, :updated_at
 
@@ -52,5 +54,12 @@ class Post
       posts << post
     end
     posts
+  end
+
+  def save
+    return false unless valid_save?
+
+    client = create_db_client
+    client.query("INSERT INTO posts(user_id, text, attachment_path) VALUES ('#{@user_id}', '#{@text}', '#{@attachment_path}')")
   end
 end
