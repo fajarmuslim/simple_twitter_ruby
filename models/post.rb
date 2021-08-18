@@ -38,6 +38,7 @@ class Post
 
   def self.convert_sql_result_to_array(sql_result)
     posts = []
+    return posts if sql_result.nil?
 
     sql_result.each do |row|
       post = Post.new(

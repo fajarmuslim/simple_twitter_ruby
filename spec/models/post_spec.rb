@@ -197,6 +197,15 @@ describe Post do
           expect(actual_array[i].updated_at).to eq(expected_array[i].updated_at)
         end
       end
+
+      it 'should return empty array' do
+        sql_result = nil
+
+        actual_array = Post.convert_sql_result_to_array(sql_result)
+        expected_array = []
+
+        expect(expected_array.size).to eq(actual_array.size)
+      end
     end
   end
 end
