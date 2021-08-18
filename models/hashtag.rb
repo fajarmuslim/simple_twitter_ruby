@@ -20,4 +20,8 @@ class Hashtag
 
     true
   end
+
+  def valid_save?
+    valid_text?
+  end
 end

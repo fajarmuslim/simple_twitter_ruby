@@ -101,5 +101,17 @@ describe Hashtag do
         expect(hashtag.valid_text?).to be_falsey
       end
     end
+
+    context '#valid_save?' do
+      it 'should valid save' do
+        params = {
+          text: 'aaa'
+        }
+
+        hashtag = Hashtag.new(params)
+
+        expect(hashtag.valid_save?).to be_truthy
+      end
+    end
   end
 end
