@@ -63,4 +63,10 @@ class Post
     client.query("INSERT INTO posts(user_id, text, attachment_path) VALUES ('#{@user_id}', '#{@text}', '#{@attachment_path}')")
     client.last_id
   end
+
+  def self.find_all
+    client = create_db_client
+    sql_result = client.query('SELECT * FROM posts')
+    convert_sql_result_to_array(sql_result)
+  end
 end
