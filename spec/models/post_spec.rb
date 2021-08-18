@@ -160,6 +160,17 @@ describe Post do
 
         expect(post.valid_save?).to be_truthy
       end
+
+      it 'should invalid save' do
+        params = {
+          text: 'post text #gigih',
+          attachment_path: '/public/aaa.png'
+        }
+
+        post = Post.new(params)
+
+        expect(post.valid_save?).to be_falsey
+      end
     end
   end
 end
