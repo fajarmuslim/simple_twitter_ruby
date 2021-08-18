@@ -126,6 +126,16 @@ describe Post do
 
         expect(post.valid_text?).to be_falsey
       end
+
+      it 'should invalid type not string' do
+        params = {
+          text: 1
+        }
+
+        post = Post.new(params)
+
+        expect(post.valid_text?).to be_falsey
+      end
     end
   end
 end
