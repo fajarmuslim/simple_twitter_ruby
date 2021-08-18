@@ -149,5 +149,17 @@ describe Comment do
         expect(comment.valid_post_id?).to be_falsey
       end
     end
+
+    context '#valid_text?' do
+      it 'should valid text' do
+        params = {
+          text: 'aaa'
+        }
+
+        comment = Comment.new(params)
+
+        expect(comment.valid_text?).to be_truthy
+      end
+    end
   end
 end

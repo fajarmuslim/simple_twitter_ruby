@@ -31,4 +31,8 @@ class Comment
 
     true
   end
+
+  def valid_text?
+    true
+  end
 end
