@@ -35,4 +35,21 @@ class Post
   def valid_save?
     valid_user_id? and valid_text?
   end
+
+  def self.convert_sql_result_to_array(sql_result)
+    posts = []
+
+    sql_result.each do |row|
+      post = Post.new(
+        id: row['id'],
+        user_id: row['user_id'],
+        text: row['text'],
+        attachment_path: row['attachment_path'],
+        created_at: row['created_at'],
+        updated_at: row['updated_at']
+      )
+      posts << post
+    end
+    posts
+  end
 end
