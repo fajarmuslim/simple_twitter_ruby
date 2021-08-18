@@ -1,6 +1,18 @@
 require_relative '../../models/post'
 
 describe Post do
+  $client = create_db_client
+
+  before(:each) do
+    $client.query('SET FOREIGN_KEY_CHECKS = 0')
+    $client.query('TRUNCATE table posts')
+  end
+
+  after(:all) do
+    $client.query('TRUNCATE table posts')
+    $client.query('SET FOREIGN_KEY_CHECKS = 1')
+  end
+
   describe 'initialize' do
     context '.new' do
       it 'should create object' do
@@ -222,9 +234,30 @@ describe Post do
 
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        allow(mock_client).to receive(:last_id).and_return(1)
 
         expect(mock_client).to receive(:query).with("INSERT INTO posts(user_id, text, attachment_path) VALUES ('#{post.user_id}', '#{post.text}', '#{post.attachment_path}')")
+        expect(post.save).not_to be_nil
+      end
+
+      it 'should save data to db' do
+        params = {
+          user_id: 1,
+          text: 'post text #gigih',
+          attachment_path: '/public/aaa.png'
+        }
+
+        post = Post.new(params)
         post.save
+
+        result = $client.query('SELECT * FROM posts')
+        expect(result.size).to eq(1)
+
+        saved_user = result.first
+
+        expect(saved_user['user_id']).to eq(params[:user_id])
+        expect(saved_user['text']).to eq(params[:text])
+        expect(saved_user['attachment_path']).to eq(params[:attachment_path])
       end
     end
   end
