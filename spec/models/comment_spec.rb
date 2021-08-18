@@ -243,7 +243,7 @@ describe Comment do
       it 'should return filled array' do
         sql_result = [
           { 'id' => 1, 'user_id' => 1, 'post_id' => 1, 'attachment_path' => '/aaa', 'created_at' => '2021-08-18 19:31:56', 'updated_at' => '2021-08-18 19:31:56' },
-          { 'id' => 2, 'user_id' => 2, 'post_id' => 2,  'attachment_path' => '/bbb', 'created_at' => '2021-08-18 19:31:57', 'updated_at' => '2021-08-18 19:31:57' }
+          { 'id' => 2, 'user_id' => 2, 'post_id' => 2, 'attachment_path' => '/bbb', 'created_at' => '2021-08-18 19:31:57', 'updated_at' => '2021-08-18 19:31:57' }
         ]
 
         expected_comment_1 = Comment.new({ id: 1, user_id: 1, post_id: 1, attachment_path: '/aaa', created_at: '2021-08-18 19:31:56', updated_at: '2021-08-18 19:31:56' })
@@ -314,6 +314,55 @@ describe Comment do
         expect(saved_user['post_id']).to eq(params[:post_id])
         expect(saved_user['text']).to eq(params[:text])
         expect(saved_user['attachment_path']).to eq(params[:attachment_path])
+      end
+    end
+  end
+
+  describe 'read' do
+    context '#find_all' do
+      it 'should receive correct query' do
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+
+        expect(mock_client).to receive(:query).with('SELECT * FROM comments')
+        expect(Comment.find_all).to eq([])
+      end
+
+      it 'should get data from db' do
+        params_1 = {
+          user_id: 1,
+          post_id: 1,
+          text: 'comment text #gigih1',
+          attachment_path: '/public/aaa1.png'
+        }
+
+        comment_1 = Comment.new(params_1)
+        comment_1.save
+
+        params_2 = {
+          user_id: 1,
+          post_id: 1,
+          text: 'comment text #gigih2',
+          attachment_path: '/public/aaa2.png'
+        }
+
+        comment_2 = Comment.new(params_2)
+        comment_2.save
+
+        result = Comment.find_all
+        expect(result.size).to eq(2)
+
+        result_1 = result[0]
+        expect(result_1.user_id).to eq(params_1[:user_id])
+        expect(result_1.post_id).to eq(params_2[:post_id])
+        expect(result_1.text).to eq(params_1[:text])
+        expect(result_1.attachment_path).to eq(params_1[:attachment_path])
+
+        result_2 = result[1]
+        expect(result_2.user_id).to eq(params_2[:user_id])
+        expect(result_2.post_id).to eq(params_2[:post_id])
+        expect(result_2.text).to eq(params_2[:text])
+        expect(result_2.attachment_path).to eq(params_2[:attachment_path])
       end
     end
   end
