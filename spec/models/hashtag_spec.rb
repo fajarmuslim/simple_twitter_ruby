@@ -81,5 +81,15 @@ describe Hashtag do
 
       expect(hashtag.valid_text?).to be_falsey
     end
+
+    it 'should invalid type not string' do
+      params = {
+        text: 1
+      }
+
+      hashtag = Hashtag.new(params)
+
+      expect(hashtag.valid_text?).to be_falsey
+    end
   end
 end
