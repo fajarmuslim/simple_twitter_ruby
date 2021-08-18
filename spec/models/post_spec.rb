@@ -84,6 +84,16 @@ describe Post do
 
         expect(post.valid_user_id?).to be_falsey
       end
+
+      it 'should invalid nol integer' do
+        params = {
+          user_id: 0
+        }
+
+        post = Post.new(params)
+
+        expect(post.valid_user_id?).to be_falsey
+      end
     end
   end
 end
