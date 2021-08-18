@@ -170,6 +170,16 @@ describe Comment do
 
         expect(comment.valid_text?).to be_falsey
       end
+
+      it 'should invalid type not string' do
+        params = {
+          text: 1
+        }
+
+        comment = Comment.new(params)
+
+        expect(comment.valid_text?).to be_falsey
+      end
     end
   end
 end
