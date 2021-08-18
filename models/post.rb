@@ -69,4 +69,10 @@ class Post
     sql_result = client.query('SELECT * FROM posts')
     convert_sql_result_to_array(sql_result)
   end
+
+  def self.find_by_id(id)
+    client = create_db_client
+    sql_result = client.query("SELECT * FROM posts WHERE id = #{id}")
+    convert_sql_result_to_array(sql_result)[0]
+  end
 end
