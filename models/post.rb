@@ -60,7 +60,7 @@ class Post
     return false unless valid_save?
 
     client = create_db_client
-    client.query("INSERT INTO posts(user_id, text, attachment_path) VALUES ('#{@user_id}', '#{@text}', '#{@attachment_path}')")
+    client.query("INSERT INTO posts(user_id, text, attachment_path) VALUES (#{@user_id}, '#{@text}', '#{@attachment_path}')")
     client.last_id
   end
 

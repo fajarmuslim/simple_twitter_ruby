@@ -239,7 +239,7 @@ describe Post do
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
         allow(mock_client).to receive(:last_id).and_return(1)
 
-        expect(mock_client).to receive(:query).with("INSERT INTO posts(user_id, text, attachment_path) VALUES ('#{post.user_id}', '#{post.text}', '#{post.attachment_path}')")
+        expect(mock_client).to receive(:query).with("INSERT INTO posts(user_id, text, attachment_path) VALUES (#{post.user_id}, '#{post.text}', '#{post.attachment_path}')")
         expect(post.save).not_to be_nil
       end
 
