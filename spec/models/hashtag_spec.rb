@@ -213,31 +213,54 @@ describe Hashtag do
         expect(mock_client).to receive(:query).with('SELECT * FROM hashtags')
         expect(Hashtag.find_all).to eq([])
       end
+
+      it 'should get data from db' do
+        params_1 = {
+          text: 'aaa'
+        }
+
+        hashtag_1 = Hashtag.new(params_1)
+        hashtag_1.save
+
+        params_2 = {
+          text: 'bbb'
+        }
+
+        hashtag_2 = Hashtag.new(params_2)
+        hashtag_2.save
+
+        result = Hashtag.find_all
+        expect(result.size).to eq(2)
+
+        result_1 = result[0]
+        expect(result_1.text).to eq(params_1[:text])
+
+        result_2 = result[1]
+        expect(result_2.text).to eq(params_2[:text])
+      end
     end
+    context '#find_by_id' do
+      it 'should receive correct query' do
+        id = 1
 
-    it 'should get data from db' do
-      params_1 = {
-        text: 'aaa'
-      }
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
 
-      hashtag_1 = Hashtag.new(params_1)
-      hashtag_1.save
+        expect(mock_client).to receive(:query).with("SELECT * FROM hashtags WHERE id = #{id}")
+        expect(Hashtag.find_by_id(id)).to eq(nil)
+      end
 
-      params_2 = {
-        text: 'bbb'
-      }
+      it 'should get data from db' do
+        params = {
+          text: 'aaa'
+        }
 
-      hashtag_2 = Hashtag.new(params_2)
-      hashtag_2.save
+        hashtag = Hashtag.new(params)
+        hashtag.save
 
-      result = Hashtag.find_all
-      expect(result.size).to eq(2)
-
-      result_1 = result[0]
-      expect(result_1.text).to eq(params_1[:text])
-
-      result_2 = result[1]
-      expect(result_2.text).to eq(params_2[:text])
+        result = Hashtag.find_by_id(1)
+        expect(result.text).to eq(params[:text])
+      end
     end
   end
 end
