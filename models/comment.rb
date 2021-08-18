@@ -26,6 +26,8 @@ class Comment
   end
 
   def valid_post_id?
+    return false if @post_id.negative?
+
     true
   end
 end

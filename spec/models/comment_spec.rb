@@ -119,5 +119,15 @@ describe Comment do
         expect(comment.valid_post_id?).to be_truthy
       end
     end
+
+    it 'should invalid negative integer' do
+      params = {
+        post_id: -1
+      }
+
+      comment = Comment.new(params)
+
+      expect(comment.valid_post_id?).to be_falsey
+    end
   end
 end
