@@ -19,9 +19,13 @@ class Comment
   end
 
   def valid_user_id?
-    return false unless @id.is_a? Integer
+    return false unless @user_id.is_a? Integer
     return false if @user_id.negative? || @user_id.zero?
 
+    true
+  end
+
+  def valid_post_id?
     true
   end
 end
