@@ -31,4 +31,8 @@ class Post
 
     true
   end
+
+  def valid_save?
+    valid_user_id? and valid_text?
+  end
 end
