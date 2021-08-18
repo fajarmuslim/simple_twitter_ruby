@@ -96,6 +96,16 @@ describe Comment do
 
         expect(comment.valid_user_id?).to be_falsey
       end
+
+      it 'should invalid if type is not integer' do
+        params = {
+          user_id: 'aaa'
+        }
+
+        comment = Comment.new(params)
+
+        expect(comment.valid_user_id?).to be_falsey
+      end
     end
   end
 end
