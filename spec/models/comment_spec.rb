@@ -180,6 +180,16 @@ describe Comment do
 
         expect(comment.valid_text?).to be_falsey
       end
+
+      it 'should invalid exceed 1000 character' do
+        params = {
+          text: 'a' * 1001
+        }
+
+        comment = Comment.new(params)
+
+        expect(comment.valid_text?).to be_falsey
+      end
     end
   end
 end

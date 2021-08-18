@@ -35,6 +35,7 @@ class Comment
   def valid_text?
     return false unless @text.is_a? String
     return false if @text == ''
+    return false if @text.length > 1000
 
     true
   end
