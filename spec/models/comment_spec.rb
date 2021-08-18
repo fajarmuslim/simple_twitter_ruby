@@ -8,7 +8,7 @@ describe Comment do
           id: 1,
           post_id: 1,
           user_id: 1,
-          text: 'post text #gigih',
+          text: 'comment text #gigih',
           attachment_path: '/public/aaa.png'
         }
 
