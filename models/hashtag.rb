@@ -14,6 +14,8 @@ class Hashtag
   end
 
   def valid_text?
+    return false if @text.length.zero?
+
     true
   end
 end
