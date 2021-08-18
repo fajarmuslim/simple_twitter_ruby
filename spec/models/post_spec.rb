@@ -94,6 +94,16 @@ describe Post do
 
         expect(post.valid_user_id?).to be_falsey
       end
+
+      it 'should invalid if type is not integer' do
+        params = {
+          user_id: 'aaa'
+        }
+
+        post = Post.new(params)
+
+        expect(post.valid_user_id?).to be_falsey
+      end
     end
   end
 end
