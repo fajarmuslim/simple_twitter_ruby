@@ -1,6 +1,24 @@
 require_relative '../../models/comment'
 
 describe Comment do
+  $client = create_db_client
+
+  before(:each) do
+    $client.query('SET FOREIGN_KEY_CHECKS = 0')
+    $client.query('TRUNCATE table comments')
+    $client.query('TRUNCATE table posts')
+    $client.query('TRUNCATE table users')
+    $client.query("INSERT INTO users(username, email, bio) VALUES('aa', 'email@email.com', 'bio')")
+    $client.query("INSERT INTO posts(user_id, text) VALUES(1, 'aaa')")
+  end
+
+  after(:all) do
+    $client.query('TRUNCATE table comments')
+    $client.query('TRUNCATE table posts')
+    $client.query('TRUNCATE table users')
+    $client.query('SET FOREIGN_KEY_CHECKS = 1')
+  end
+
   describe 'initialize' do
     context '.new' do
       it 'should create object' do
@@ -252,6 +270,50 @@ describe Comment do
         expected_array = []
 
         expect(expected_array.size).to eq(actual_array.size)
+      end
+    end
+  end
+
+  describe 'create' do
+    context '#save' do
+      it 'should receive correct query' do
+        params = {
+          user_id: 1,
+          post_id: 1,
+          text: 'comment text #gigih',
+          attachment_path: '/public/aaa.png'
+        }
+
+        comment = Comment.new(params)
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        allow(mock_client).to receive(:last_id).and_return(1)
+
+        expect(mock_client).to receive(:query).with("INSERT INTO comments(user_id, post_id, text, attachment_path) VALUES (#{params[:user_id]}, #{params[:post_id]}, '#{params[:text]}', '#{params[:attachment_path]}')")
+        expect(comment.save).not_to be_nil
+      end
+
+      it 'should save data to db' do
+        params = {
+          user_id: 1,
+          post_id: 1,
+          text: 'comment text #gigih',
+          attachment_path: '/public/aaa.png'
+        }
+
+        comment = Comment.new(params)
+        comment.save
+
+        result = $client.query('SELECT * FROM comments')
+        expect(result.size).to eq(1)
+
+        saved_user = result.first
+
+        expect(saved_user['user_id']).to eq(params[:user_id])
+        expect(saved_user['post_id']).to eq(params[:post_id])
+        expect(saved_user['text']).to eq(params[:text])
+        expect(saved_user['attachment_path']).to eq(params[:attachment_path])
       end
     end
   end

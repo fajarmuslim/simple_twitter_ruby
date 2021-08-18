@@ -1,3 +1,5 @@
+require_relative '../db/mysql_connector'
+
 class Comment
   attr_reader :id, :post_id, :user_id, :text, :attachment_path, :created_at, :updated_at
 
@@ -61,5 +63,13 @@ class Comment
       comments << comment
     end
     comments
+  end
+
+  def save
+    return false unless valid_save?
+
+    client = create_db_client
+    client.query("INSERT INTO comments(user_id, post_id, text, attachment_path) VALUES (#{@user_id}, #{@post_id}, '#{@text}', '#{@attachment_path}')")
+    client.last_id
   end
 end
