@@ -371,33 +371,33 @@ describe User do
       expect(result_2.email).to eq(params_2[:email])
       expect(result_2.bio).to eq(params_2[:bio])
     end
+  end
 
-    context '#find_by_id' do
-      it 'should receive correct query' do
-        id = 1
+  context '#find_by_id' do
+    it 'should receive correct query' do
+      id = 1
 
-        mock_client = double
-        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+      mock_client = double
+      allow(Mysql2::Client).to receive(:new).and_return(mock_client)
 
-        expect(mock_client).to receive(:query).with("SELECT * FROM users WHERE id = #{id}")
-        expect(User.find_by_id(id)).to eq(nil)
-      end
+      expect(mock_client).to receive(:query).with("SELECT * FROM users WHERE id = #{id}")
+      expect(User.find_by_id(id)).to eq(nil)
+    end
 
-      it 'should get data from db' do
-        params = {
-          username: 'fajar1',
-          email: 'fajar1@domain.com',
-          bio: 'fajar1 bio'
-        }
+    it 'should get data from db' do
+      params = {
+        username: 'fajar1',
+        email: 'fajar1@domain.com',
+        bio: 'fajar1 bio'
+      }
 
-        user = User.new(params)
-        user.save
+      user = User.new(params)
+      user.save
 
-        result = User.find_by_id(1)
-        expect(result.username).to eq(params[:username])
-        expect(result.email).to eq(params[:email])
-        expect(result.bio).to eq(params[:bio])
-      end
+      result = User.find_by_id(1)
+      expect(result.username).to eq(params[:username])
+      expect(result.email).to eq(params[:email])
+      expect(result.bio).to eq(params[:bio])
     end
   end
 end
