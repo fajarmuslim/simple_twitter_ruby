@@ -39,5 +39,15 @@ describe Hashtag do
 
       expect(hashtag.valid_id?).to be_falsey
     end
+
+    it 'should invalid nol integer' do
+      params = {
+        id: 0
+      }
+
+      hashtag = Hashtag.new(params)
+
+      expect(hashtag.valid_id?).to be_falsey
+    end
   end
 end
