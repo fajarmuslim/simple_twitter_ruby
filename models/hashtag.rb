@@ -1,5 +1,5 @@
 class Hashtag
-  attr_accessor :id, :text
+  attr_reader :id, :text
 
   def initialize(params)
     @id= params[:id]

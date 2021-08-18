@@ -3,7 +3,7 @@ require_relative '../db/mysql_connector'
 $client = create_db_client
 
 class User
-  attr_accessor :id, :username, :email, :bio, :posts, :comments
+  attr_reader :id, :username, :email, :bio, :posts, :comments
 
   def initialize(params)
     @id = params[:id]
