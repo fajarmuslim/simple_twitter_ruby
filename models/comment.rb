@@ -10,4 +10,8 @@ class Comment
     @created_at = params[:created_at]
     @updated_at = params[:updated_at]
   end
+
+  def valid_id?
+    true
+  end
 end

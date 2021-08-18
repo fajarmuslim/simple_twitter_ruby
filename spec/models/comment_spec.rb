@@ -22,4 +22,18 @@ describe Comment do
       end
     end
   end
+
+  describe 'validity' do
+    context '#valid_id?' do
+      it 'should valid positive integer' do
+        params = {
+          id: 1
+        }
+
+        comment = Comment.new(params)
+
+        expect(comment.valid_id?).to be_truthy
+      end
+    end
+  end
 end
