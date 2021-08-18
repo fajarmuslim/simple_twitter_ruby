@@ -337,67 +337,67 @@ describe User do
         expect(mock_client).to receive(:query).with('SELECT * FROM users')
         expect(User.find_all).to eq([])
       end
+
+      it 'should get data from db' do
+        params_1 = {
+          username: 'fajar1',
+          email: 'fajar1@domain.com',
+          bio: 'fajar1 bio'
+        }
+
+        user_1 = User.new(params_1)
+        user_1.save
+
+        params_2 = {
+          username: 'fajar2',
+          email: 'fajar2@domain.com',
+          bio: 'fajar2 bio'
+        }
+
+        user_2 = User.new(params_2)
+        user_2.save
+
+        result = User.find_all
+        expect(result.size).to eq(2)
+
+        result_1 = result[0]
+        expect(result_1.username).to eq(params_1[:username])
+        expect(result_1.email).to eq(params_1[:email])
+        expect(result_1.bio).to eq(params_1[:bio])
+
+        result_2 = result[1]
+        expect(result_2.username).to eq(params_2[:username])
+        expect(result_2.email).to eq(params_2[:email])
+        expect(result_2.bio).to eq(params_2[:bio])
+      end
     end
 
-    it 'should get data from db' do
-      params_1 = {
-        username: 'fajar1',
-        email: 'fajar1@domain.com',
-        bio: 'fajar1 bio'
-      }
+    context '#find_by_id' do
+      it 'should receive correct query' do
+        id = 1
 
-      user_1 = User.new(params_1)
-      user_1.save
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
 
-      params_2 = {
-        username: 'fajar2',
-        email: 'fajar2@domain.com',
-        bio: 'fajar2 bio'
-      }
+        expect(mock_client).to receive(:query).with("SELECT * FROM users WHERE id = #{id}")
+        expect(User.find_by_id(id)).to eq(nil)
+      end
 
-      user_2 = User.new(params_2)
-      user_2.save
+      it 'should get data from db' do
+        params = {
+          username: 'fajar1',
+          email: 'fajar1@domain.com',
+          bio: 'fajar1 bio'
+        }
 
-      result = User.find_all
-      expect(result.size).to eq(2)
+        user = User.new(params)
+        user.save
 
-      result_1 = result[0]
-      expect(result_1.username).to eq(params_1[:username])
-      expect(result_1.email).to eq(params_1[:email])
-      expect(result_1.bio).to eq(params_1[:bio])
-
-      result_2 = result[1]
-      expect(result_2.username).to eq(params_2[:username])
-      expect(result_2.email).to eq(params_2[:email])
-      expect(result_2.bio).to eq(params_2[:bio])
-    end
-  end
-
-  context '#find_by_id' do
-    it 'should receive correct query' do
-      id = 1
-
-      mock_client = double
-      allow(Mysql2::Client).to receive(:new).and_return(mock_client)
-
-      expect(mock_client).to receive(:query).with("SELECT * FROM users WHERE id = #{id}")
-      expect(User.find_by_id(id)).to eq(nil)
-    end
-
-    it 'should get data from db' do
-      params = {
-        username: 'fajar1',
-        email: 'fajar1@domain.com',
-        bio: 'fajar1 bio'
-      }
-
-      user = User.new(params)
-      user.save
-
-      result = User.find_by_id(1)
-      expect(result.username).to eq(params[:username])
-      expect(result.email).to eq(params[:email])
-      expect(result.bio).to eq(params[:bio])
+        result = User.find_by_id(1)
+        expect(result.username).to eq(params[:username])
+        expect(result.email).to eq(params[:email])
+        expect(result.bio).to eq(params[:bio])
+      end
     end
   end
 end
