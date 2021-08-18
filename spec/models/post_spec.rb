@@ -20,4 +20,18 @@ describe Post do
       end
     end
   end
+
+  describe 'validity' do
+    context '#valid_id?' do
+      it 'should valid positive integer' do
+        params = {
+          id: 1
+        }
+
+        post = Post.new(params)
+
+        expect(post.valid_id?).to be_truthy
+      end
+    end
+  end
 end
