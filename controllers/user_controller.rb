@@ -5,4 +5,8 @@ class UserController
     user = User.new(params)
     user.save
   end
+
+  def self.find_all
+    User.find_all
+  end
 end

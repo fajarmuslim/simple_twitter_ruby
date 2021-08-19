@@ -1,6 +1,18 @@
 require_relative '../../controllers/user_controller'
 
 describe UserController do
+  $client = create_db_client
+
+  before(:each) do
+    $client.query('SET FOREIGN_KEY_CHECKS = 0')
+    $client.query('TRUNCATE table users')
+  end
+
+  after(:all) do
+    $client.query('TRUNCATE table users')
+    $client.query('SET FOREIGN_KEY_CHECKS = 1')
+  end
+
   describe 'create' do
     context '#create' do
       it 'should create user in db' do
@@ -20,6 +32,43 @@ describe UserController do
         expect(saved_user['username']).to eq(params[:username])
         expect(saved_user['email']).to eq(params[:email])
         expect(saved_user['bio']).to eq(params[:bio])
+      end
+    end
+  end
+
+  describe 'read' do
+    context '#find_all' do
+      it 'should get all user in db' do
+        params_1 = {
+          username: 'fajar1',
+          email: 'fajar1@domain.com',
+          bio: 'fajar1 bio'
+        }
+
+        user_1 = User.new(params_1)
+        user_1.save
+
+        params_2 = {
+          username: 'fajar2',
+          email: 'fajar2@domain.com',
+          bio: 'fajar2 bio'
+        }
+
+        user_2 = User.new(params_2)
+        user_2.save
+
+        result = UserController.find_all
+        expect(result.size).to eq(2)
+
+        result_1 = result[0]
+        expect(result_1.username).to eq(params_1[:username])
+        expect(result_1.email).to eq(params_1[:email])
+        expect(result_1.bio).to eq(params_1[:bio])
+
+        result_2 = result[1]
+        expect(result_2.username).to eq(params_2[:username])
+        expect(result_2.email).to eq(params_2[:email])
+        expect(result_2.bio).to eq(params_2[:bio])
       end
     end
   end
