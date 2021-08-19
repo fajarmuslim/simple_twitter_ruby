@@ -71,5 +71,24 @@ describe UserController do
         expect(result_2.bio).to eq(params_2[:bio])
       end
     end
+
+    context '#find_by_id' do
+      it 'should get data from db' do
+        params = {
+          username: 'fajar1',
+          email: 'fajar1@domain.com',
+          bio: 'fajar1 bio'
+        }
+        id = 1
+
+        user = User.new(params)
+        user.save
+
+        result = UserController.find_by_id(id)
+        expect(result.username).to eq(params[:username])
+        expect(result.email).to eq(params[:email])
+        expect(result.bio).to eq(params[:bio])
+      end
+    end
   end
 end
