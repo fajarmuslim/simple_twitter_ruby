@@ -33,6 +33,48 @@ describe UserController do
         expect(saved_user['email']).to eq(params[:email])
         expect(saved_user['bio']).to eq(params[:bio])
       end
+
+      it 'should error username' do
+        params = {
+          username: 'fajar',
+          email: 'fajar@domain.com',
+          bio: 'fajar bio'
+        }
+
+        UserController.create(params)
+
+        begin
+          UserController.create(params)
+        rescue Mysql2::Error => exception
+          response = exception.message
+        ensure
+          expect(response).to eq("Duplicate entry '#{params[:username]}' for key 'users.username'")
+        end
+      end
+
+      it 'should error email' do
+        params_1 = {
+          username: 'aaa',
+          email: 'fajar@domain.com',
+          bio: 'fajar bio'
+        }
+
+        params_2 = {
+          username: 'bbb',
+          email: 'fajar@domain.com',
+          bio: 'fajar bio'
+        }
+
+        UserController.create(params_1)
+
+        begin
+          UserController.create(params_2)
+        rescue Mysql2::Error => exception
+          response = exception.message
+        ensure
+          expect(response).to eq("Duplicate entry '#{params_1[:email]}' for key 'users.email'")
+        end
+      end
     end
   end
 
