@@ -5,4 +5,8 @@ class PostController
     post = Post.new(params)
     post.save
   end
+
+  def self.find_all
+    Post.find_all
+  end
 end

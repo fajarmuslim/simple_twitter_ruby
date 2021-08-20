@@ -38,4 +38,41 @@ describe PostController do
       end
     end
   end
+
+  describe 'read' do
+    context '#find_all' do
+      it 'should get data from db' do
+        params_1 = {
+          user_id: 1,
+          text: 'post text #gigih1',
+          attachment_path: '/public/aaa1.png'
+        }
+
+        post_1 = Post.new(params_1)
+        post_1.save
+
+        params_2 = {
+          user_id: 1,
+          text: 'post text #gigih2',
+          attachment_path: '/public/aaa2.png'
+        }
+
+        post_2 = Post.new(params_2)
+        post_2.save
+
+        result = PostController.find_all
+        expect(result.size).to eq(2)
+
+        result_1 = result[0]
+        expect(result_1.user_id).to eq(params_1[:user_id])
+        expect(result_1.text).to eq(params_1[:text])
+        expect(result_1.attachment_path).to eq(params_1[:attachment_path])
+
+        result_2 = result[1]
+        expect(result_2.user_id).to eq(params_2[:user_id])
+        expect(result_2.text).to eq(params_2[:text])
+        expect(result_2.attachment_path).to eq(params_2[:attachment_path])
+      end
+    end
+  end
 end
