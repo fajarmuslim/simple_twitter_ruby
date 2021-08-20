@@ -74,5 +74,39 @@ describe PostController do
         expect(result_2.attachment_path).to eq(params_2[:attachment_path])
       end
     end
+
+    context '#find_by_id' do
+      it 'should get data from db' do
+        params = {
+          user_id: 1,
+          text: 'post text #gigih',
+          attachment_path: '/public/aaa.png'
+        }
+        id = 1
+
+        post = Post.new(params)
+        post.save
+
+        result = PostController.find_by_id(id)
+        expect(result.user_id).to eq(params[:user_id])
+        expect(result.text).to eq(params[:text])
+        expect(result.attachment_path).to eq(params[:attachment_path])
+      end
+
+      it 'should empty result' do
+        params = {
+          user_id: 1,
+          text: 'post text #gigih',
+          attachment_path: '/public/aaa.png'
+        }
+        id = 2
+
+        post = Post.new(params)
+        post.save
+
+        result = PostController.find_by_id(id)
+        expect(result).to eq(nil)
+      end
+    end
   end
 end

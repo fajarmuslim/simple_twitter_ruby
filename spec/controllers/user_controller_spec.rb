@@ -132,7 +132,7 @@ describe UserController do
         expect(result.bio).to eq(params[:bio])
       end
 
-      it 'should empty' do
+      it 'should empty result' do
         params = {
           username: 'fajar',
           email: 'fajar@domain.com',
