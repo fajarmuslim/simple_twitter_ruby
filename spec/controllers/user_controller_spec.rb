@@ -131,6 +131,21 @@ describe UserController do
         expect(result.email).to eq(params[:email])
         expect(result.bio).to eq(params[:bio])
       end
+
+      it 'should empty' do
+        params = {
+          username: 'fajar',
+          email: 'fajar@domain.com',
+          bio: 'fajar bio'
+        }
+        id = 2
+
+        user = User.new(params)
+        user.save
+
+        result = UserController.find_by_id(id)
+        expect(result).to eq(nil)
+      end
     end
   end
 end
