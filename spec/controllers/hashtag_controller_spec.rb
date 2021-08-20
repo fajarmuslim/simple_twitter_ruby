@@ -59,5 +59,33 @@ describe HashtagController do
         expect(result_2.text).to eq(params_2[:text])
       end
     end
+
+    context '#find_by_id' do
+      it 'should get data from db' do
+        params = {
+          text: 'aaa'
+        }
+        id = 1
+
+        hashtag = Hashtag.new(params)
+        hashtag.save
+
+        result = HashtagController.find_by_id(id)
+        expect(result.text).to eq(params[:text])
+      end
+
+      it 'should get data from db' do
+        params = {
+          text: 'aaa'
+        }
+        id = 2
+
+        hashtag = Hashtag.new(params)
+        hashtag.save
+
+        result = HashtagController.find_by_id(id)
+        expect(result).to eq(nil)
+      end
+    end
   end
 end
