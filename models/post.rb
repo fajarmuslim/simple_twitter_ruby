@@ -1,4 +1,5 @@
 require_relative '../db/mysql_connector'
+require_relative '../models/hashtag'
 
 class Post
   attr_reader :id, :user_id, :text, :attachment_path, :created_at, :updated_at
@@ -61,7 +62,13 @@ class Post
 
     client = create_db_client
     client.query("INSERT INTO posts(user_id, text, attachment_path) VALUES (#{@user_id}, '#{@text}', '#{@attachment_path}')")
-    client.last_id
+    post_id = client.last_id
+
+    string_hashtags = Hashtag.find_hashtags_in_string(@text)
+
+    Post_Hashtag.insert_hashtags_to_db(post_id, string_hashtags)
+
+    post_id
   end
 
   def self.find_all
@@ -74,5 +81,40 @@ class Post
     client = create_db_client
     sql_result = client.query("SELECT * FROM posts WHERE id = #{id}")
     convert_sql_result_to_array(sql_result)[0]
+  end
+
+  def self.find_posts_contain_hashtag(string_hashtag)
+    result = Hashtag.find_by_text(string_hashtag)
+    hashtag_id = result.id unless result.nil?
+
+    post_ids = Post_Hashtag.find_post_ids(hashtag_id)
+    find_post_from_post_ids(post_ids)
+  end
+
+  def self.find_post_from_post_ids(post_ids)
+    posts = []
+    post_ids.each do |post_id|
+      puts "post_id: #{post_id}"
+      posts << Post.find_by_id(post_id)
+    end
+    posts
+  end
+
+  def to_hash
+    {
+      user_id: @user_id,
+      text: @text,
+      attachment_path: @attachment_path,
+      created_at: @created_at,
+      updated_at: @updated_at
+    }
+  end
+
+  def self.array_posts_to_hash(posts)
+    result = []
+    posts.each do |post|
+      result << post.to_hash
+    end
+    { 'post': result }
   end
 end

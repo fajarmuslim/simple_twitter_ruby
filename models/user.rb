@@ -43,6 +43,7 @@ class User
   end
 
   def valid_bio?
+    return true if @bio.nil?
     return false unless @bio.is_a? String
     return false if @bio.length > 1000
 
@@ -87,5 +88,21 @@ class User
     client = create_db_client
     sql_result = client.query("SELECT * FROM users WHERE id = #{id}")
     convert_sql_result_to_array(sql_result)[0]
+  end
+
+  def to_hash
+    {
+      username: @username,
+      email: @email,
+      bio: @bio
+    }
+  end
+
+  def self.array_users_to_hash(users)
+    result = []
+    users.each do |user|
+      result << user.to_hash
+    end
+    { 'users': result }
   end
 end

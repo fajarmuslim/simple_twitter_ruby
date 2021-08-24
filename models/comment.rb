@@ -1,12 +1,12 @@
 require_relative '../db/mysql_connector'
 
 class Comment
-  attr_reader :id, :post_id, :user_id, :text, :attachment_path, :created_at, :updated_at
+  attr_reader :id, :user_id, :post_id, :text, :attachment_path, :created_at, :updated_at
 
   def initialize(params)
     @id = params[:id]
-    @post_id = params[:post_id]
     @user_id = params[:user_id]
+    @post_id = params[:post_id]
     @text = params[:text]
     @attachment_path = params[:attachment_path]
     @created_at = params[:created_at]
@@ -70,7 +70,13 @@ class Comment
 
     client = create_db_client
     client.query("INSERT INTO comments(user_id, post_id, text, attachment_path) VALUES (#{@user_id}, #{@post_id}, '#{@text}', '#{@attachment_path}')")
-    client.last_id
+
+    comment_id = client.last_id
+
+    string_hashtags = Hashtag.find_hashtags_in_string(@text)
+    Comment_Hashtag.insert_hashtags_to_db(comment_id, string_hashtags)
+
+    comment_id
   end
 
   def self.find_all
@@ -83,5 +89,41 @@ class Comment
     client = create_db_client
     sql_result = client.query("SELECT * FROM comments WHERE id = #{id}")
     convert_sql_result_to_array(sql_result)[0]
+  end
+
+  def self.find_comments_contain_hashtag(string_hashtag)
+    result = Hashtag.find_by_text(string_hashtag)
+    hashtag_id = result.id unless result.nil?
+
+    comment_ids = Comment_Hashtag.find_comment_ids(hashtag_id)
+    find_comment_from_comment_ids(comment_ids)
+  end
+
+  def self.find_comment_from_comment_ids(comment_ids)
+    comments = []
+    comment_ids.each do |comment_id|
+      comments << Comment.find_by_id(comment_id)
+    end
+
+    comments
+  end
+
+  def to_hash
+    {
+      user_id: @user_id,
+      post_id: @post_id,
+      text: @text,
+      attachment_path: @attachment_path,
+      created_at: @created_at,
+      updated_at: @updated_at
+    }
+  end
+
+  def self.array_comments_to_hash(comments)
+    result = []
+    comments.each do |comment|
+      result << comment.to_hash
+    end
+    { 'comment': result }
   end
 end
