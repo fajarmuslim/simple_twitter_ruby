@@ -64,15 +64,20 @@
         name: simple_twitter_ruby
         state: import
         target: /home/gbe01058/app/db/simple_twitter_ruby.sql
-    - name: Move 'sinatra.service' file to /etc/systemd/system/
+    - name: Move 'sinatra.service' file to '/etc/systemd/system/'
       become: yes
       shell:
         cmd: mv /home/gbe01058/app/sinatra.service /etc/systemd/system/
+    - name: Reload Daemon
+      become: yes
+      systemd:
+        daemon-reload: true
     - name: Enabling sinatra application
       become: yes
       systemd:
         enabled: yes
         name: sinatra
+        force: true
     - name: Starting sinatra application
       become: yes
       systemd:
