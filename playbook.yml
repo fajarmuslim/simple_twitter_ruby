@@ -82,4 +82,4 @@
       become: yes
       systemd:
         name: sinatra
-        state: started
+        state: restarted
