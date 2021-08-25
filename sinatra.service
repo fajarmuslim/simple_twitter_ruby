@@ -7,7 +7,7 @@ Environment="USERNAME=gbe01058"
 Environment="PASSWORD=gbe01058"
 Environment="DB_NAME=simple_twitter_ruby"
 User=gbe01058
-WorkingDirectory=/app
+WorkingDirectory=/home/gbe01058/app
 ExecStart=/home/gbe01058/.rbenv/shims/ruby main.rb -o 0.0.0.0 -p 4567
 Restart=on-failure
 

@@ -9,76 +9,72 @@
       apt:
         name: "*"
         state: latest
-    - name: Installing build-essential, libssl-dev, zlib1g-dev, mysql-server
+    - name: Installing required linux package required in this project
       become: yes
       apt:
         autoclean: yes
         autoremove: yes
         install-recommends: no
-        only_upgrade: yes
         name:
+          - curl
+          - autoconf
+          - bison
           - build-essential
           - libssl-dev
+          - libyaml-dev
+          - libreadline6-dev
           - zlib1g-dev
+          - libncurses5-dev
+          - libffi-dev
+          - libgdbm6
+          - libgdbm-dev
+          - libdb-dev
           - mysql-server
-    - name: Cloning rbenv repository
-      git:
-        dest: /home/gbe01058/.rbenv
-        repo: https://github.com/rbenv/rbenv.git
-    - name: Export rbenv path
-      shell: echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-    - name: Export rbenv eval
-      shell: echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-    - name: Cloning ruby-build repository
-      git:
-        dest: /home/gbe01058/.rbenv/plugins/ruby-build
-        repo: https://github.com/rbenv/ruby-build.git
-    - name: Cloning rbenv-vars repository
-      git:
-        dest: /home/gbe01058/.rbenv/plugins/rbenv-vars
-        repo: https://github.com/rbenv/rbenv-vars.git
-    - name: Cloning 'app repo'
-      git:
-        dest: /home/gbe01058/app
-        repo: https://github.com/fajarmuslim/simple_twitter_ruby.git
-    - name: Executing shell
-      shell: exec $SHELL
-    - name: install ruby version 3.0.1
-      shell: /home/gbe01058/.rbenv/bin/rbenv install 3.0.1
-    - name: Setting ruby version 3.0.1 as global
+          - libmysqlclient-dev
+          - python3-mysqldb
+    - name: Install rbenv
+      shell: curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
+    - name: Install ruby version 3.0.1
+      shell: /home/gbe01058/.rbenv/bin/rbenv install 3.0.1 -s
+    - name: setting ruby version 3.0.1 as global
       shell: /home/gbe01058/.rbenv/bin/rbenv global 3.0.1
-    - name: Install gem sinatra, thin, and mysql2
-      shell: /home/gbe01058/.rbenv/shims/gem install sinatra, thin, mysql2
-    - name: Create database user 'gbe01058' and password 'gbe01058' with all previleges
+    - name: Install gem sinatra and mysql2
+      shell: /home/gbe01058/.rbenv/shims/gem install sinatra mysql2
+    - name: Create database user 'gbe01058' and password 'gbe01058' with all previlages
       become: yes
       mysql_user:
         login_unix_socket: /var/run/mysqld/mysqld.sock
         name: gbe01058
-        passowrd: gbe01058
-        prive: "*.*:ALL"
+        password: gbe01058
+        priv: "*.*:ALL"
     - name: Create database 'simple_twitter_ruby'
       mysql_db:
         login_user: gbe01058
         login_password: gbe01058
         name: simple_twitter_ruby
-    - name: Change workdir to /home/gbe01058/app
-      chdir: /home/gbe01058/app
+    - name: Cloning 'app repo'
+      git:
+        force: yes
+        dest: /home/gbe01058/app
+        repo: https://github.com/fajarmuslim/simple_twitter_ruby.git
     - name: Importing 'simple_twitter_ruby.sql'
       mysql_db:
         login_user: gbe01058
         login_password: gbe01058
         name: simple_twitter_ruby
         state: import
-        target: /db/simple_twitter_ruby.sql
+        target: /home/gbe01058/app/db/simple_twitter_ruby.sql
     - name: Move 'sinatra.service' file to /etc/systemd/system/
       become: yes
       shell:
-        cmd: mv /sinatra.service /etc/systemd/system/
+        cmd: mv /home/gbe01058/app/sinatra.service /etc/systemd/system/
     - name: Enabling sinatra application
+      become: yes
       systemd:
         enabled: yes
         name: sinatra
     - name: Starting sinatra application
+      become: yes
       systemd:
         name: sinatra
         state: started
