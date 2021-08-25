@@ -1,0 +1,2505 @@
+{
+	"info": {
+		"_postman_id": "a77f8af2-3016-4d35-8562-1c979f59c7ec",
+		"name": "simple_twitter_ruby",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "fajaraaa",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "fajaraaaa@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "bio",
+									"value": "aaaaa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://34.101.197.203:4567/user/create",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"user",
+								"create"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "fajar@gmail.com",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success create user with bio",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "fajar",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "fajar@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "bio",
+											"value": "fajar bio",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/user/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"user",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "119"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"message\": \"success created user\",\n    \"data\": {\n        \"username\": \"fajar\",\n        \"email\": \"fajar@gmail.com\",\n        \"bio\": \"fajar bio\"\n    }\n}"
+						},
+						{
+							"name": "success create without bio",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "fajara",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "fajara@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/user/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"user",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "114"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"message\": \"success created user\",\n    \"data\": {\n        \"username\": \"fajara\",\n        \"email\": \"fajara@gmail.com\",\n        \"bio\": null\n    }\n}"
+						},
+						{
+							"name": "error duplicate username",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "fajar",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "fajar@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "bio",
+											"value": "fajar bio",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/user/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"user",
+										"create"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "75"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"Duplicate entry 'fajar' for key 'users.username'\"\n}"
+						},
+						{
+							"name": "error username field empty",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "fajara@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/user/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"user",
+										"create"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "fajar@gmail.com",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"username field required\"\n}"
+						},
+						{
+							"name": "error email field empty",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "fajar",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/user/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"user",
+										"create"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "fajar@gmail.com",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"email field required\"\n}"
+						},
+						{
+							"name": "error duplicate email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "fajara",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "fajar@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "bio",
+											"value": "fajar bio",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/user/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"user",
+										"create"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"Duplicate entry 'fajar@gmail.com' for key 'users.email'\"\n}"
+						}
+					]
+				},
+				{
+					"name": "find_by_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://34.101.197.203:4567/user/1",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "cannot find id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/user/1000",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"user",
+										"1000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 404,\n    \"message\": \"cannot find your user id\"\n}"
+						},
+						{
+							"name": "success find_by_id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/user/1",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"user",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "106"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"username\": \"fajar\",\n        \"email\": \"fajar@gmail.com\",\n        \"bio\": \"fajar bio\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "find_all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://34.101.197.203:4567/user",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success find_all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/user",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "118"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"users\": [\n            {\n                \"username\": \"fajar\",\n                \"email\": \"fajar@gmail.com\",\n                \"bio\": \"fajar bio\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "post",
+			"item": [
+				{
+					"name": "find_all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://34.101.197.203:4567/post",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success find_all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/post",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"post"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "533"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"post\": [\n            {\n                \"user_id\": 1,\n                \"text\": \"pandemi kemudian #ppkm\",\n                \"attachment_path\": \"\",\n                \"created_at\": \"2021-08-25 04:18:52 +0000\",\n                \"updated_at\": \"2021-08-25 04:18:52 +0000\"\n            },\n            {\n                \"user_id\": 1,\n                \"text\": \"pandemi kemudian #ppkm\",\n                \"attachment_path\": \"public/png/temp.png\",\n                \"created_at\": \"2021-08-25 04:20:08 +0000\",\n                \"updated_at\": \"2021-08-25 04:20:08 +0000\"\n            },\n            {\n                \"user_id\": 1,\n                \"text\": \"pandemi pandemi lalalal #corona #ppkm\",\n                \"attachment_path\": \"\",\n                \"created_at\": \"2021-08-25 04:23:49 +0000\",\n                \"updated_at\": \"2021-08-25 04:23:49 +0000\"\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "success find_all. empty post",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/post",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"post"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"post\": []\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "pandemi pandemi lalalal #corona #ppkm",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://34.101.197.203:4567/post/create",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"post",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success create post with attachment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "text",
+											"value": "pandemi kemudian #ppkm",
+											"type": "text"
+										},
+										{
+											"key": "attachment",
+											"type": "file",
+											"src": "/home/fajar/Desktop/temp.png"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/post/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"post",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "222"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"message\": \"success created post\",\n    \"data\": {\n        \"user_id\": 1,\n        \"text\": \"pandemi kemudian #ppkm\",\n        \"attachment_path\": \"public/png/temp.png\",\n        \"created_at\": \"2021-08-25 04:20:08 +0000\",\n        \"updated_at\": \"2021-08-25 04:20:08 +0000\"\n    }\n}"
+						},
+						{
+							"name": "error user_id required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "text",
+											"value": "pandemi kemudian #ppkm",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/post/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"post",
+										"create"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"user_id field required\"\n}"
+						},
+						{
+							"name": "success create post without attachment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "text",
+											"value": "pandemi kemudian #ppkm",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/post/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"post",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "203"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"message\": \"success created post\",\n    \"data\": {\n        \"user_id\": 1,\n        \"text\": \"pandemi kemudian #ppkm\",\n        \"attachment_path\": \"\",\n        \"created_at\": \"2021-08-25 04:18:52 +0000\",\n        \"updated_at\": \"2021-08-25 04:18:52 +0000\"\n    }\n}"
+						},
+						{
+							"name": "error text field required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/post/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"post",
+										"create"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"text field required\"\n}"
+						},
+						{
+							"name": "error text cannot exceed 1000 char",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "text",
+											"value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/post/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"post",
+										"create"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"text cannot exceed 1000 char\"\n}"
+						}
+					]
+				},
+				{
+					"name": "find_by_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://34.101.197.203:4567/post/1",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"post",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success find id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/post/1",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"post",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "190"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"user_id\": 1,\n        \"text\": \"pandemi kemudian #ppkm\",\n        \"attachment_path\": \"\",\n        \"created_at\": \"2021-08-25 04:18:52 +0000\",\n        \"updated_at\": \"2021-08-25 04:18:52 +0000\"\n    }\n}"
+						},
+						{
+							"name": "error cannot find post id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/post/1000",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"post",
+										"1000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 404,\n    \"message\": \"cannot find your post id\"\n}"
+						}
+					]
+				},
+				{
+					"name": "find_post_contain_hashtag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://34.101.197.203:4567/post/hashtag/ppkm",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"post",
+								"hashtag",
+								"ppkm"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success find post contain hashtag",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/post/hashtag/ppkm",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"post",
+										"hashtag",
+										"ppkm"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "533"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"post\": [\n            {\n                \"user_id\": 1,\n                \"text\": \"pandemi kemudian #ppkm\",\n                \"attachment_path\": \"\",\n                \"created_at\": \"2021-08-25 04:18:52 +0000\",\n                \"updated_at\": \"2021-08-25 04:18:52 +0000\"\n            },\n            {\n                \"user_id\": 1,\n                \"text\": \"pandemi kemudian #ppkm\",\n                \"attachment_path\": \"public/png/temp.png\",\n                \"created_at\": \"2021-08-25 04:20:08 +0000\",\n                \"updated_at\": \"2021-08-25 04:20:08 +0000\"\n            },\n            {\n                \"user_id\": 1,\n                \"text\": \"pandemi pandemi lalalal #corona #ppkm\",\n                \"attachment_path\": \"\",\n                \"created_at\": \"2021-08-25 04:23:49 +0000\",\n                \"updated_at\": \"2021-08-25 04:23:49 +0000\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "comment",
+			"item": [
+				{
+					"name": "find_all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://34.101.197.203:4567/comment",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"comment"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success find all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/comment",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"comment"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "557"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"comment\": [\n            {\n                \"user_id\": 1,\n                \"post_id\": 1,\n                \"text\": \"pandemi #covid19\",\n                \"attachment_path\": \"public/png/temp.png\",\n                \"created_at\": \"2021-08-25 04:35:12 +0000\",\n                \"updated_at\": \"2021-08-25 04:35:12 +0000\"\n            },\n            {\n                \"user_id\": 1,\n                \"post_id\": 1,\n                \"text\": \"pandemi #covid19\",\n                \"attachment_path\": \"\",\n                \"created_at\": \"2021-08-25 04:35:47 +0000\",\n                \"updated_at\": \"2021-08-25 04:35:47 +0000\"\n            },\n            {\n                \"user_id\": 1,\n                \"post_id\": 1,\n                \"text\": \"#vaksin sinovac\",\n                \"attachment_path\": \"public/png/temp.png\",\n                \"created_at\": \"2021-08-25 04:40:02 +0000\",\n                \"updated_at\": \"2021-08-25 04:40:02 +0000\"\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "success find all. empty comments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/comment",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"comment"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"comment\": []\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "post_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "#vaksin sinovac",
+									"type": "text"
+								},
+								{
+									"key": "attachment",
+									"type": "file",
+									"src": "/home/fajar/Desktop/temp.png"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://34.101.197.203:4567/comment/create",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"comment",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error user_id required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "post_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "text",
+											"value": "pandemi #covid19",
+											"type": "text"
+										},
+										{
+											"key": "attachment",
+											"type": "file",
+											"src": "/home/fajar/Desktop/temp.png"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/comment/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"comment",
+										"create"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"user_id field required\"\n}"
+						},
+						{
+							"name": "success create comment with attachment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "post_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "text",
+											"value": "pandemi #covid19",
+											"type": "text"
+										},
+										{
+											"key": "attachment",
+											"type": "file",
+											"src": "/home/fajar/Desktop/temp.png"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/comment/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"comment",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "231"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"message\": \"success created comment\",\n    \"data\": {\n        \"user_id\": 1,\n        \"post_id\": 1,\n        \"text\": \"pandemi #covid19\",\n        \"attachment_path\": \"public/png/temp.png\",\n        \"created_at\": \"2021-08-25 04:35:12 +0000\",\n        \"updated_at\": \"2021-08-25 04:35:12 +0000\"\n    }\n}"
+						},
+						{
+							"name": "success create comment without attachment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "post_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "text",
+											"value": "pandemi #covid19",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/comment/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"comment",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "212"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"message\": \"success created comment\",\n    \"data\": {\n        \"user_id\": 1,\n        \"post_id\": 1,\n        \"text\": \"pandemi #covid19\",\n        \"attachment_path\": \"\",\n        \"created_at\": \"2021-08-25 04:35:47 +0000\",\n        \"updated_at\": \"2021-08-25 04:35:47 +0000\"\n    }\n}"
+						},
+						{
+							"name": "error text field required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "post_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "attachment",
+											"type": "file",
+											"src": "/home/fajar/Desktop/temp.png"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/comment/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"comment",
+										"create"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"text field required\"\n}"
+						},
+						{
+							"name": "error post_id required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "text",
+											"value": "pandemi #covid19",
+											"type": "text"
+										},
+										{
+											"key": "attachment",
+											"type": "file",
+											"src": "/home/fajar/Desktop/temp.png"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/comment/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"comment",
+										"create"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"post_id field required\"\n}"
+						}
+					]
+				},
+				{
+					"name": "find_by_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://34.101.197.203:4567/comment/1000",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"comment",
+								"1000"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success find by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/comment/1",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"comment",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "215"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"user_id\": 1,\n        \"post_id\": 1,\n        \"text\": \"pandemi #covid19\",\n        \"attachment_path\": \"public/png/temp.png\",\n        \"created_at\": \"2021-08-25 04:35:12 +0000\",\n        \"updated_at\": \"2021-08-25 04:35:12 +0000\"\n    }\n}"
+						},
+						{
+							"name": "error cannot find comment id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/comment/1000",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"comment",
+										"1000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "54"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 404,\n    \"message\": \"cannot find your comment id\"\n}"
+						}
+					]
+				},
+				{
+					"name": "find_comment_contain_hashtag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://34.101.197.203:4567/comment/hashtag/vaksin",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"comment",
+								"hashtag",
+								"vaksin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success find comment contain hashtag",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/comment/hashtag/vaksin",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"comment",
+										"hashtag",
+										"vaksin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "401"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"comment\": [\n            {\n                \"user_id\": 1,\n                \"post_id\": 1,\n                \"text\": \"#vaksin sinovac\",\n                \"attachment_path\": \"public/png/temp.png\",\n                \"created_at\": \"2021-08-25 04:40:02 +0000\",\n                \"updated_at\": \"2021-08-25 04:40:02 +0000\"\n            },\n            {\n                \"user_id\": 1,\n                \"post_id\": 1,\n                \"text\": \"#vaksin sinovac\",\n                \"attachment_path\": \"public/png/temp.png\",\n                \"created_at\": \"2021-08-25 04:48:07 +0000\",\n                \"updated_at\": \"2021-08-25 04:48:07 +0000\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "hashtag",
+			"item": [
+				{
+					"name": "find_all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://34.101.197.203:4567/hashtag",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"hashtag"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success find all hashtag",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/hashtag",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"hashtag"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "126"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"hashtag\": [\n            {\n                \"text\": \"ppkm\"\n            },\n            {\n                \"text\": \"corona\"\n            },\n            {\n                \"text\": \"covid19\"\n            },\n            {\n                \"text\": \"vaksin\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "text",
+									"value": "aaaa",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://34.101.197.203:4567/hashtag/create",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"hashtag",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success create hashtag",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "text",
+											"value": "pfizer",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.101.197.203:4567/hashtag/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"hashtag",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "75"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"message\": \"success created hashtag\",\n    \"data\": {\n        \"text\": \"pfizer\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "find_by_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://34.101.197.203:4567/hashtag/1",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"hashtag",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success find by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/hashtag/1",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"hashtag",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"text\": \"ppkm\"\n    }\n}"
+						},
+						{
+							"name": "error cannot find hashtag id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/hashtag/1000",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"hashtag",
+										"1000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "54"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 404,\n    \"message\": \"cannot find your hashtag id\"\n}"
+						}
+					]
+				},
+				{
+					"name": "find_trending_hashtag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://34.101.197.203:4567/hashtag/trending",
+							"protocol": "http",
+							"host": [
+								"34",
+								"101",
+								"197",
+								"203"
+							],
+							"port": "4567",
+							"path": [
+								"hashtag",
+								"trending"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "find trending hashtag",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.101.197.203:4567/hashtag/trending",
+									"protocol": "http",
+									"host": [
+										"34",
+										"101",
+										"197",
+										"203"
+									],
+									"port": "4567",
+									"path": [
+										"hashtag",
+										"trending"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "235"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "thin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"hashtags\": [\n            {\n                \"hashtag\": {\n                    \"text\": \"ppkm\"\n                },\n                \"occurrence\": 3\n            },\n            {\n                \"hashtag\": {\n                    \"text\": \"covid19\"\n                },\n                \"occurrence\": 2\n            },\n            {\n                \"hashtag\": {\n                    \"text\": \"vaksin\"\n                },\n                \"occurrence\": 2\n            },\n            {\n                \"hashtag\": {\n                    \"text\": \"corona\"\n                },\n                \"occurrence\": 1\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
