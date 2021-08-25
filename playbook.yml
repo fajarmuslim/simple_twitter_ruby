@@ -39,7 +39,7 @@
     - name: setting ruby version 3.0.1 as global
       shell: /home/gbe01058/.rbenv/bin/rbenv global 3.0.1
     - name: Install gem sinatra and mysql2
-      shell: /home/gbe01058/.rbenv/shims/gem install sinatra mysql2
+      shell: /home/gbe01058/.rbenv/shims/gem install sinatra thin mysql2
     - name: Create database user 'gbe01058' and password 'gbe01058' with all previlages
       become: yes
       mysql_user:
