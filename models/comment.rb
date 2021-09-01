@@ -4,13 +4,13 @@ class Comment
   attr_reader :id, :user_id, :post_id, :text, :attachment_path, :created_at, :updated_at
 
   def initialize(params)
-    @id = params[:id]
-    @user_id = params[:user_id]
-    @post_id = params[:post_id]
-    @text = params[:text]
-    @attachment_path = params[:attachment_path]
-    @created_at = params[:created_at]
-    @updated_at = params[:updated_at]
+    @id = params['id']
+    @user_id = params['user_id']
+    @post_id = params['post_id']
+    @text = params['text']
+    @attachment_path = params['attachment_path']
+    @created_at = params['created_at']
+    @updated_at = params['updated_at']
   end
 
   def valid_id?
@@ -52,13 +52,13 @@ class Comment
 
     sql_result.each do |row|
       comment = Comment.new(
-        id: row['id'],
-        user_id: row['user_id'],
-        post_id: row['post_id'],
-        text: row['text'],
-        attachment_path: row['attachment_path'],
-        created_at: row['created_at'],
-        updated_at: row['updated_at']
+        'id'=> row['id'],
+        'user_id'=> row['user_id'],
+        'post_id'=> row['post_id'],
+        'text'=> row['text'],
+        'attachment_path'=> row['attachment_path'],
+        'created_at'=> row['created_at'],
+        'updated_at'=> row['updated_at']
       )
       comments << comment
     end
@@ -124,6 +124,6 @@ class Comment
     comments.each do |comment|
       result << comment.to_hash
     end
-    { 'comment': result }
+    { 'comment'=> result }
   end
 end

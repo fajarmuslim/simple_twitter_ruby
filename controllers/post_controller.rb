@@ -10,6 +10,7 @@ class PostController
 
       params['user_id'] = params['user_id'].to_i
       attachment_path = save_attachment_file(params['attachment']) unless params['attachment'].nil?
+
       params['attachment_path'] = attachment_path
 
       post = Post.new(params)

@@ -17,18 +17,18 @@ describe User do
     context '.new' do
       it 'should create object' do
         params = {
-          id: 1,
-          username: 'andi',
-          email: 'andi@gmail.com',
-          bio: 'andi si bolang'
+          'id' => 1,
+          'username' => 'andi',
+          'email' => 'andi@gmail.com',
+          'bio' => 'andi si bolang'
         }
 
         user = User.new(params)
 
-        expect(user.id).to eq(params[:id])
-        expect(user.username).to eq(params[:username])
-        expect(user.email).to eq(params[:email])
-        expect(user.bio).to eq(params[:bio])
+        expect(user.id).to eq(params['id'])
+        expect(user.username).to eq(params['username'])
+        expect(user.email).to eq(params['email'])
+        expect(user.bio).to eq(params['bio'])
         expect(user.posts).to eq([])
         expect(user.comments).to eq([])
       end
@@ -39,7 +39,7 @@ describe User do
     context '#valid_id?' do
       it 'should valid positive integer' do
         params = {
-          id: 1
+          'id' => 1
         }
 
         user = User.new(params)
@@ -59,7 +59,7 @@ describe User do
 
       it 'should invalid nol integer' do
         params = {
-          id: 0
+          'id' => 0
         }
 
         user = User.new(params)
@@ -69,7 +69,7 @@ describe User do
 
       it 'should invalid if type is not integer' do
         params = {
-          id: 'aaa'
+          'id' => 'aaa'
         }
 
         user = User.new(params)
@@ -81,7 +81,7 @@ describe User do
     context '#valid_username?' do
       it 'should valid username' do
         params = {
-          username: 'fajar'
+          'username' => 'fajar'
         }
 
         user = User.new(params)
@@ -91,7 +91,7 @@ describe User do
 
       it 'should invalid empty string' do
         params = {
-          username: ''
+          'username'=> ''
         }
 
         user = User.new(params)
@@ -101,7 +101,7 @@ describe User do
 
       it 'should invalid type not string' do
         params = {
-          username: 1
+          'username'=> 1
         }
 
         user = User.new(params)
@@ -111,7 +111,7 @@ describe User do
 
       it 'should invalid exceed 255 character' do
         params = {
-          username: 'a' * 256
+          'username'=> 'a' * 256
         }
 
         user = User.new(params)
@@ -123,7 +123,7 @@ describe User do
     context '#valid_email?' do
       it 'should valid email' do
         params = {
-          email: 'fajarmuslim@domain.com'
+          'email' => 'fajarmuslim@domain.com'
         }
 
         user = User.new(params)
@@ -133,7 +133,7 @@ describe User do
 
       it 'should invalid empty string' do
         params = {
-          email: ''
+          'email' => ''
         }
 
         user = User.new(params)
@@ -143,7 +143,7 @@ describe User do
 
       it 'should invalid type not string string' do
         params = {
-          email: 1
+          'email'=> 1
         }
 
         user = User.new(params)
@@ -153,7 +153,7 @@ describe User do
 
       it 'should invalid exceed 255 character' do
         params = {
-          email: 'a' * 256
+          'email'=> 'a' * 256
         }
 
         user = User.new(params)
@@ -163,7 +163,7 @@ describe User do
 
       it 'should invalid email pattern' do
         params = {
-          email: 'domain.com'
+          'email'=> 'domain.com'
         }
 
         user = User.new(params)
@@ -175,7 +175,7 @@ describe User do
     context '#valid_email_pattern?' do
       it 'should valid email pattern' do
         params = {
-          email: 'fajarmuslim@domain.com'
+          'email'=> 'fajarmuslim@domain.com'
         }
 
         user = User.new(params)
@@ -185,7 +185,7 @@ describe User do
 
       it 'should invalid email pattern' do
         params = {
-          email: '@domain.com'
+          'email'=> '@domain.com'
         }
 
         user = User.new(params)
@@ -197,7 +197,7 @@ describe User do
     context '#valid_bio?' do
       it 'should valid bio' do
         params = {
-          bio: 'bio description'
+          'bio'=> 'bio description'
         }
 
         user = User.new(params)
@@ -207,7 +207,7 @@ describe User do
 
       it 'should invalid not string' do
         params = {
-          bio: 1
+          'bio'=> 1
         }
 
         user = User.new(params)
@@ -217,7 +217,7 @@ describe User do
 
       it 'should invalid exceed 1000 char' do
         params = {
-          bio: 'a' * 1001
+          'bio'=> 'a' * 1001
         }
 
         user = User.new(params)
@@ -230,9 +230,9 @@ describe User do
   context '#valid_save?' do
     it 'should valid save' do
       params = {
-        username: 'fajar',
-        email: 'fajar@domain.com',
-        bio: 'fajar bio'
+        'username'=> 'fajar',
+        'email'=> 'fajar@domain.com',
+        'bio'=> 'fajar bio'
       }
 
       user = User.new(params)
@@ -242,9 +242,9 @@ describe User do
 
     it 'should invalid save' do
       params = {
-        username: 'fajar',
-        email: 'domain.com',
-        bio: 'fajar bio'
+        'username'=> 'fajar',
+        'email'=> 'domain.com',
+        'bio'=> 'fajar bio'
       }
 
       user = User.new(params)
@@ -261,8 +261,8 @@ describe User do
           { 'id' => 2, 'username' => 'budi', 'email' => 'budi@gmail.com', 'bio_desc' => 'budi doremi' },
         ]
 
-        expected_user_1 = User.new({ id: 1, username: 'andi', email: 'andi@gmail.com', bio_desc: 'andi si bolang' })
-        expected_user_2 = User.new({ id: 2, username: 'budi', email: 'budi@gmail.com', bio_desc: 'budi doremi' })
+        expected_user_1 = User.new({ 'id'=> 1, 'username'=> 'andi', 'email'=> 'andi@gmail.com', 'bio_desc'=> 'andi si bolang' })
+        expected_user_2 = User.new({ 'id'=> 2, 'username'=> 'budi', 'email'=> 'budi@gmail.com', 'bio_desc'=> 'budi doremi' })
 
         actual_array = User.convert_sql_result_to_array(sql_result)
         expected_array = [expected_user_1, expected_user_2]
@@ -291,9 +291,9 @@ describe User do
     context '#save' do
       it 'should receive correct query' do
         params = {
-          username: 'fajar',
-          email: 'fajar@domain.com',
-          bio: 'fajar bio'
+          'username'=> 'fajar',
+          'email'=> 'fajar@domain.com',
+          'bio'=> 'fajar bio'
         }
 
         user = User.new(params)
@@ -308,9 +308,9 @@ describe User do
 
       it 'should save data to db' do
         params = {
-          username: 'fajar',
-          email: 'fajar@domain.com',
-          bio: 'fajar bio'
+          'username'=> 'fajar',
+          'email'=> 'fajar@domain.com',
+          'bio'=> 'fajar bio'
         }
 
         user = User.new(params)
@@ -321,9 +321,9 @@ describe User do
 
         saved_user = result.first
 
-        expect(saved_user['username']).to eq(params[:username])
-        expect(saved_user['email']).to eq(params[:email])
-        expect(saved_user['bio']).to eq(params[:bio])
+        expect(saved_user['username']).to eq(params['username'])
+        expect(saved_user['email']).to eq(params['email'])
+        expect(saved_user['bio']).to eq(params['bio'])
       end
     end
   end
@@ -340,18 +340,18 @@ describe User do
 
       it 'should get data from db' do
         params_1 = {
-          username: 'fajar1',
-          email: 'fajar1@domain.com',
-          bio: 'fajar1 bio'
+          'username'=> 'fajar1',
+          'email'=> 'fajar1@domain.com',
+          'bio'=> 'fajar1 bio'
         }
 
         user_1 = User.new(params_1)
         user_1.save
 
         params_2 = {
-          username: 'fajar2',
-          email: 'fajar2@domain.com',
-          bio: 'fajar2 bio'
+          'username'=> 'fajar2',
+          'email'=> 'fajar2@domain.com',
+          'bio'=> 'fajar2 bio'
         }
 
         user_2 = User.new(params_2)
@@ -361,14 +361,14 @@ describe User do
         expect(result.size).to eq(2)
 
         result_1 = result[0]
-        expect(result_1.username).to eq(params_1[:username])
-        expect(result_1.email).to eq(params_1[:email])
-        expect(result_1.bio).to eq(params_1[:bio])
+        expect(result_1.username).to eq(params_1['username'])
+        expect(result_1.email).to eq(params_1['email'])
+        expect(result_1.bio).to eq(params_1['bio'])
 
         result_2 = result[1]
-        expect(result_2.username).to eq(params_2[:username])
-        expect(result_2.email).to eq(params_2[:email])
-        expect(result_2.bio).to eq(params_2[:bio])
+        expect(result_2.username).to eq(params_2['username'])
+        expect(result_2.email).to eq(params_2['email'])
+        expect(result_2.bio).to eq(params_2['bio'])
       end
     end
 
@@ -385,18 +385,18 @@ describe User do
 
       it 'should get data from db' do
         params = {
-          username: 'fajar1',
-          email: 'fajar1@domain.com',
-          bio: 'fajar1 bio'
+          'username'=> 'fajar1',
+          'email'=> 'fajar1@domain.com',
+          'bio'=> 'fajar1 bio'
         }
 
         user = User.new(params)
         user.save
 
         result = User.find_by_id(1)
-        expect(result.username).to eq(params[:username])
-        expect(result.email).to eq(params[:email])
-        expect(result.bio).to eq(params[:bio])
+        expect(result.username).to eq(params['username'])
+        expect(result.email).to eq(params['email'])
+        expect(result.bio).to eq(params['bio'])
       end
     end
   end

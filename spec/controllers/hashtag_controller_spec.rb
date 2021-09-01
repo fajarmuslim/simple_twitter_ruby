@@ -17,7 +17,7 @@ describe HashtagController do
     context '#save' do
       it 'should save data to db' do
         params = {
-          text: 'aaa'
+          'text'=> 'aaa'
         }
 
         HashtagController.create(params)
@@ -27,7 +27,7 @@ describe HashtagController do
 
         saved_hashtag = result.first
 
-        expect(saved_hashtag['text']).to eq(params[:text])
+        expect(saved_hashtag['text']).to eq(params['text'])
       end
     end
   end
@@ -36,55 +36,65 @@ describe HashtagController do
     context '#find_all' do
       it 'should get data from db' do
         params_1 = {
-          text: 'aaa'
+          'text'=> 'aaa'
+        }
+        expected_data_1 = {
+          text: params_1['text']
         }
 
         hashtag_1 = Hashtag.new(params_1)
         hashtag_1.save
 
         params_2 = {
-          text: 'bbb'
+          'text'=> 'bbb'
+        }
+        expected_data_2 = {
+          text: params_2['text']
         }
 
+        expected_data = { 'hashtag': [expected_data_1, expected_data_2] }
         hashtag_2 = Hashtag.new(params_2)
         hashtag_2.save
 
-        result = HashtagController.find_all
-        expect(result.size).to eq(2)
-
-        result_1 = result[0]
-        expect(result_1.text).to eq(params_1[:text])
-
-        result_2 = result[1]
-        expect(result_2.text).to eq(params_2[:text])
+        status, message, data = HashtagController.find_all
+        expect(status).to eq(OK)
+        expect(message).to eq('success')
+        expect(data).to eq(expected_data)
       end
     end
 
     context '#find_by_id' do
       it 'should get data from db' do
         params = {
-          text: 'aaa'
+          'text'=> 'aaa'
+        }
+        expected_data = {
+          text: params['text']
         }
         id = 1
 
         hashtag = Hashtag.new(params)
         hashtag.save
 
-        result = HashtagController.find_by_id(id)
-        expect(result.text).to eq(params[:text])
+        status, message, data = HashtagController.find_by_id(id)
+        expect(status).to eq(OK)
+        expect(message).to eq('success')
+        expect(data).to eq(expected_data)
       end
 
       it 'should get data from db' do
         params = {
-          text: 'aaa'
+          'text'=> 'aaa'
         }
         id = 2
 
         hashtag = Hashtag.new(params)
         hashtag.save
 
-        result = HashtagController.find_by_id(id)
-        expect(result).to eq(nil)
+        status, message, data = HashtagController.find_by_id(id)
+        expect(status).to eq(NOT_FOUND)
+        expect(message).to eq('cannot find your hashtag id')
+        expect(data).to eq(nil)
       end
     end
   end

@@ -6,8 +6,8 @@ class Hashtag
   attr_reader :id, :text
 
   def initialize(params)
-    @id = params[:id]
-    @text = params[:text]
+    @id = params['id']
+    @text = params['text']
   end
 
   def valid_id?
@@ -35,8 +35,8 @@ class Hashtag
 
     sql_result.each do |row|
       hashtag = Hashtag.new(
-        id: row['id'],
-        text: row['text']
+        'id'=> row['id'],
+        'text'=> row['text']
       )
       hashtags << hashtag
     end
@@ -71,6 +71,7 @@ class Hashtag
 
   def self.find_hashtag_id_from_string_hashtag(string_hashtag)
     result = Hashtag.find_by_text(string_hashtag)
+
     return Hashtag.create_new_hashtag(string_hashtag) if result.nil?
 
     result.id
@@ -78,7 +79,7 @@ class Hashtag
 
   def self.create_new_hashtag(string_hashtag)
     params = {
-      text: string_hashtag
+      'text'=> string_hashtag
     }
 
     new_hashtag = Hashtag.new(params)

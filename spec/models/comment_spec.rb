@@ -1,4 +1,5 @@
 require_relative '../../models/comment'
+require_relative '../../models/hashtag'
 
 describe Comment do
   $client = create_db_client
@@ -8,6 +9,8 @@ describe Comment do
     $client.query('TRUNCATE table comments')
     $client.query('TRUNCATE table posts')
     $client.query('TRUNCATE table users')
+    $client.query('TRUNCATE table posts_hashtags')
+    $client.query('TRUNCATE table comments_hashtags')
     $client.query("INSERT INTO users(username, email, bio) VALUES('aa', 'email@email.com', 'bio')")
     $client.query("INSERT INTO posts(user_id, text) VALUES(1, 'aaa')")
   end
@@ -16,6 +19,8 @@ describe Comment do
     $client.query('TRUNCATE table comments')
     $client.query('TRUNCATE table posts')
     $client.query('TRUNCATE table users')
+    $client.query('TRUNCATE table posts_hashtags')
+    $client.query('TRUNCATE table comments_hashtags')
     $client.query('SET FOREIGN_KEY_CHECKS = 1')
   end
 
@@ -23,20 +28,20 @@ describe Comment do
     context '.new' do
       it 'should create object' do
         params = {
-          id: 1,
-          post_id: 1,
-          user_id: 1,
-          text: 'comment text #gigih',
-          attachment_path: '/public/aaa.png'
+          'id' => 1,
+          'post_id' => 1,
+          'user_id' => 1,
+          'text' => 'comment text #gigih',
+          'attachment_path' => '/public/aaa.png'
         }
 
         comment = Comment.new(params)
 
-        expect(comment.id).to eq(params[:id])
-        expect(comment.post_id).to eq(params[:post_id])
-        expect(comment.user_id).to eq(params[:user_id])
-        expect(comment.text).to eq(params[:text])
-        expect(comment.attachment_path).to eq(params[:attachment_path])
+        expect(comment.id).to eq(params['id'])
+        expect(comment.post_id).to eq(params['post_id'])
+        expect(comment.user_id).to eq(params['user_id'])
+        expect(comment.text).to eq(params['text'])
+        expect(comment.attachment_path).to eq(params['attachment_path'])
       end
     end
   end
@@ -45,7 +50,7 @@ describe Comment do
     context '#valid_id?' do
       it 'should valid positive integer' do
         params = {
-          id: 1
+          'id' => 1
         }
 
         comment = Comment.new(params)
@@ -55,7 +60,7 @@ describe Comment do
 
       it 'should invalid negative integer' do
         params = {
-          id: -1
+          'id' => -1
         }
 
         comment = Comment.new(params)
@@ -65,7 +70,7 @@ describe Comment do
 
       it 'should invalid nol integer' do
         params = {
-          id: 0
+          'id' => 0
         }
 
         comment = Comment.new(params)
@@ -75,7 +80,7 @@ describe Comment do
 
       it 'should invalid if type is not integer' do
         params = {
-          id: 'aaa'
+          'id' => 'aaa'
         }
 
         comment = Comment.new(params)
@@ -87,7 +92,7 @@ describe Comment do
     context '#valid_user_id?' do
       it 'should valid user_id' do
         params = {
-          user_id: 1
+          'user_id' => 1
         }
 
         comment = Comment.new(params)
@@ -97,7 +102,7 @@ describe Comment do
 
       it 'should invalid negative integer' do
         params = {
-          user_id: -1
+          'user_id' => -1
         }
 
         comment = Comment.new(params)
@@ -107,7 +112,7 @@ describe Comment do
 
       it 'should invalid nol integer' do
         params = {
-          user_id: 0
+          'user_id' => 0
         }
 
         comment = Comment.new(params)
@@ -117,7 +122,7 @@ describe Comment do
 
       it 'should invalid if type is not integer' do
         params = {
-          user_id: 'aaa'
+          'user_id' => 'aaa'
         }
 
         comment = Comment.new(params)
@@ -129,7 +134,7 @@ describe Comment do
     context '#valid_post_id?' do
       it 'should valid post_id' do
         params = {
-          post_id: 1
+          'post_id' => 1
         }
 
         comment = Comment.new(params)
@@ -139,7 +144,7 @@ describe Comment do
 
       it 'should invalid negative integer' do
         params = {
-          post_id: -1
+          'post_id' => -1
         }
 
         comment = Comment.new(params)
@@ -149,7 +154,7 @@ describe Comment do
 
       it 'should invalid nol integer' do
         params = {
-          post_id: 0
+          'post_id' => 0
         }
 
         comment = Comment.new(params)
@@ -159,7 +164,7 @@ describe Comment do
 
       it 'should invalid if type is not integer' do
         params = {
-          post_id: 'aaa'
+          'post_id' => 'aaa'
         }
 
         comment = Comment.new(params)
@@ -171,7 +176,7 @@ describe Comment do
     context '#valid_text?' do
       it 'should valid text' do
         params = {
-          text: 'aaa'
+          'text' => 'aaa'
         }
 
         comment = Comment.new(params)
@@ -181,7 +186,7 @@ describe Comment do
 
       it 'should invalid empty string' do
         params = {
-          text: ''
+          'text' => ''
         }
 
         comment = Comment.new(params)
@@ -191,7 +196,7 @@ describe Comment do
 
       it 'should invalid type not string' do
         params = {
-          text: 1
+          'text' => 1
         }
 
         comment = Comment.new(params)
@@ -201,7 +206,7 @@ describe Comment do
 
       it 'should invalid exceed 1000 character' do
         params = {
-          text: 'a' * 1001
+          'text' => 'a' * 1001
         }
 
         comment = Comment.new(params)
@@ -213,10 +218,10 @@ describe Comment do
     context '#valid_save?' do
       it 'should valid save' do
         params = {
-          user_id: 1,
-          post_id: 1,
-          text: 'post text #gigih',
-          attachment_path: '/public/aaa.png'
+          'user_id' => 1,
+          'post_id' => 1,
+          'text' => 'post text #gigih',
+          'attachment_path' => '/public/aaa.png'
         }
 
         comment = Comment.new(params)
@@ -226,9 +231,9 @@ describe Comment do
 
       it 'should invalid save' do
         params = {
-          user_id: 1,
-          text: 'post text #gigih',
-          attachment_path: '/public/aaa.png'
+          'user_id' => 1,
+          'text' => 'post text #gigih',
+          'attachment_path' => '/public/aaa.png'
         }
 
         comment = Comment.new(params)
@@ -246,8 +251,8 @@ describe Comment do
           { 'id' => 2, 'user_id' => 2, 'post_id' => 2, 'attachment_path' => '/bbb', 'created_at' => '2021-08-18 19:31:57', 'updated_at' => '2021-08-18 19:31:57' }
         ]
 
-        expected_comment_1 = Comment.new({ id: 1, user_id: 1, post_id: 1, attachment_path: '/aaa', created_at: '2021-08-18 19:31:56', updated_at: '2021-08-18 19:31:56' })
-        expected_comment_2 = Comment.new({ id: 2, user_id: 2, post_id: 2, attachment_path: '/bbb', created_at: '2021-08-18 19:31:57', updated_at: '2021-08-18 19:31:57' })
+        expected_comment_1 = Comment.new({ 'id' => 1, 'user_id' => 1, 'post_id' => 1, 'attachment_path' => '/aaa', 'created_at' => '2021-08-18 19:31:56', 'updated_at' => '2021-08-18 19:31:56' })
+        expected_comment_2 = Comment.new({ 'id' => 2, 'user_id' => 2, 'post_id' => 2, 'attachment_path' => '/bbb', 'created_at' => '2021-08-18 19:31:57', 'updated_at' => '2021-08-18 19:31:57' })
 
         actual_array = Comment.convert_sql_result_to_array(sql_result)
         expected_array = [expected_comment_1, expected_comment_2]
@@ -276,30 +281,12 @@ describe Comment do
 
   describe 'create' do
     context '#save' do
-      it 'should receive correct query' do
-        params = {
-          user_id: 1,
-          post_id: 1,
-          text: 'comment text #gigih',
-          attachment_path: '/public/aaa.png'
-        }
-
-        comment = Comment.new(params)
-
-        mock_client = double
-        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
-        allow(mock_client).to receive(:last_id).and_return(1)
-
-        expect(mock_client).to receive(:query).with("INSERT INTO comments(user_id, post_id, text, attachment_path) VALUES (#{params[:user_id]}, #{params[:post_id]}, '#{params[:text]}', '#{params[:attachment_path]}')")
-        expect(comment.save).not_to be_nil
-      end
-
       it 'should save data to db' do
         params = {
-          user_id: 1,
-          post_id: 1,
-          text: 'comment text #gigih',
-          attachment_path: '/public/aaa.png'
+          'user_id' => 1,
+          'post_id' => 1,
+          'text' => 'comment text #gigih',
+          'attachment_path' => '/public/aaa.png'
         }
 
         comment = Comment.new(params)
@@ -310,10 +297,10 @@ describe Comment do
 
         saved_user = result.first
 
-        expect(saved_user['user_id']).to eq(params[:user_id])
-        expect(saved_user['post_id']).to eq(params[:post_id])
-        expect(saved_user['text']).to eq(params[:text])
-        expect(saved_user['attachment_path']).to eq(params[:attachment_path])
+        expect(saved_user['user_id']).to eq(params['user_id'])
+        expect(saved_user['post_id']).to eq(params['post_id'])
+        expect(saved_user['text']).to eq(params['text'])
+        expect(saved_user['attachment_path']).to eq(params['attachment_path'])
       end
     end
   end
@@ -330,20 +317,20 @@ describe Comment do
 
       it 'should get data from db' do
         params_1 = {
-          user_id: 1,
-          post_id: 1,
-          text: 'comment text #gigih1',
-          attachment_path: '/public/aaa1.png'
+          'user_id' => 1,
+          'post_id' => 1,
+          'text' => 'comment text #gigih1',
+          'attachment_path' => '/public/aaa1.png'
         }
 
         comment_1 = Comment.new(params_1)
         comment_1.save
 
         params_2 = {
-          user_id: 1,
-          post_id: 1,
-          text: 'comment text #gigih2',
-          attachment_path: '/public/aaa2.png'
+          'user_id' => 1,
+          'post_id' => 1,
+          'text' => 'comment text #gigih2',
+          'attachment_path' => '/public/aaa2.png'
         }
 
         comment_2 = Comment.new(params_2)
@@ -353,16 +340,16 @@ describe Comment do
         expect(result.size).to eq(2)
 
         result_1 = result[0]
-        expect(result_1.user_id).to eq(params_1[:user_id])
-        expect(result_1.post_id).to eq(params_1[:post_id])
-        expect(result_1.text).to eq(params_1[:text])
-        expect(result_1.attachment_path).to eq(params_1[:attachment_path])
+        expect(result_1.user_id).to eq(params_1['user_id'])
+        expect(result_1.post_id).to eq(params_1['post_id'])
+        expect(result_1.text).to eq(params_1['text'])
+        expect(result_1.attachment_path).to eq(params_1['attachment_path'])
 
         result_2 = result[1]
-        expect(result_2.user_id).to eq(params_2[:user_id])
-        expect(result_2.post_id).to eq(params_2[:post_id])
-        expect(result_2.text).to eq(params_2[:text])
-        expect(result_2.attachment_path).to eq(params_2[:attachment_path])
+        expect(result_2.user_id).to eq(params_2['user_id'])
+        expect(result_2.post_id).to eq(params_2['post_id'])
+        expect(result_2.text).to eq(params_2['text'])
+        expect(result_2.attachment_path).to eq(params_2['attachment_path'])
       end
     end
 
@@ -379,20 +366,54 @@ describe Comment do
 
       it 'should get data from db' do
         params = {
-          user_id: 1,
-          post_id: 1,
-          text: 'comment text #gigih',
-          attachment_path: '/public/aaa.png'
+          'user_id' => 1,
+          'post_id' => 1,
+          'text' => 'comment text #gigih',
+          'attachment_path' => '/public/aaa.png'
         }
 
         comment = Comment.new(params)
         comment.save
 
         result = Comment.find_by_id(1)
-        expect(result.user_id).to eq(params[:user_id])
-        expect(result.post_id).to eq(params[:post_id])
-        expect(result.text).to eq(params[:text])
-        expect(result.attachment_path).to eq(params[:attachment_path])
+        expect(result.user_id).to eq(params['user_id'])
+        expect(result.post_id).to eq(params['post_id'])
+        expect(result.text).to eq(params['text'])
+        expect(result.attachment_path).to eq(params['attachment_path'])
+      end
+    end
+
+    context '.find_comments_contain_hashtag' do
+      it 'should return comment containing hashtag' do
+        params_1 = {
+          'user_id' => 1,
+          'post_id' => 1,
+          'text' => 'comment text #gigih',
+          'attachment_path' => '/public/aaa.png'
+        }
+
+        comment_1 = Comment.new(params_1)
+        comment_1.save
+
+        params_2 = {
+          'user_id' => 1,
+          'post_id' => 1,
+          'text' => 'comment comment text #gigih',
+          'attachment_path' => '/public/aaa.png'
+        }
+
+        comment_2 = Comment.new(params_2)
+        comment_2.save
+
+        result = Comment.find_comments_contain_hashtag('gigih')
+        expect(result.size).to eq(2)
+
+        actual_comment_1 = result[0]
+        actual_comment_2 = result[1]
+
+        expect(comment_1.text).to eq(actual_comment_1.text)
+        expect(comment_2.text).to eq(actual_comment_2.text)
+        expect(actual_comment_1.text).to eq(actual_comment_1.text)
       end
     end
   end

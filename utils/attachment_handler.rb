@@ -1,5 +1,4 @@
 def save_attachment_file(file)
-  puts "file: #{file}"
   tempfile = file[:tempfile]
   filename = file[:filename]
 

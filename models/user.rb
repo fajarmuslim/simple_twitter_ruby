@@ -6,10 +6,10 @@ class User
   attr_reader :id, :username, :email, :bio, :posts, :comments
 
   def initialize(params)
-    @id = params[:id]
-    @username = params[:username]
-    @email = params[:email]
-    @bio = params[:bio]
+    @id = params['id']
+    @username = params['username']
+    @email = params['email']
+    @bio = params['bio']
     @posts = []
     @comments = []
   end
@@ -68,10 +68,10 @@ class User
 
     sql_result.each do |row|
       user = User.new(
-        id: row['id'],
-        username: row['username'],
-        email: row['email'],
-        bio: row['bio']
+        'id'=> row['id'],
+        'username'=> row['username'],
+        'email'=> row['email'],
+        'bio'=> row['bio']
       )
       users << user
     end

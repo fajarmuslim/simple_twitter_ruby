@@ -4,9 +4,9 @@ class Post_Hashtag
   attr_reader :id, :post_id, :hashtag_id
 
   def initialize(params)
-    @id = params[:id]
-    @post_id = params[:post_id]
-    @hashtag_id = params[:hashtag_id]
+    @id = params['id']
+    @post_id = params['post_id']
+    @hashtag_id = params['hashtag_id']
   end
 
   def valid_save?
@@ -27,9 +27,11 @@ class Post_Hashtag
   def self.insert_hashtags_to_db(post_id, string_hashtags)
     string_hashtags.each do |string_hashtag|
       hashtag_id = Hashtag.find_hashtag_id_from_string_hashtag(string_hashtag)
+
+
       params = {
-        post_id: post_id,
-        hashtag_id: hashtag_id
+        'post_id' => post_id,
+        'hashtag_id' => hashtag_id
       }
 
       post_hashtag = Post_Hashtag.new(params)
@@ -43,9 +45,9 @@ class Post_Hashtag
 
     sql_result.each do |row|
       post_hashtag = Post_Hashtag.new(
-        id: row['id'],
-        post_id: row['post_id'],
-        hashtag_id: row['hashtag_id']
+        'id' => row['id'],
+        'post_id' => row['post_id'],
+        'hashtag_id' => row['hashtag_id']
       )
       posts_hashtags << post_hashtag
     end
@@ -55,6 +57,7 @@ class Post_Hashtag
   def self.find_post_ids(hashtag_id)
     client = create_db_client
     sql_result = client.query("SELECT * FROM posts_hashtags WHERE hashtag_id = #{hashtag_id}")
+
     posts_hashtags = convert_sql_result_to_array(sql_result)
     post_ids = []
     posts_hashtags.each do |post_hashtag|

@@ -7,12 +7,18 @@ describe Post do
     $client.query('SET FOREIGN_KEY_CHECKS = 0')
     $client.query('TRUNCATE table users')
     $client.query('TRUNCATE table posts')
+    $client.query('TRUNCATE table posts_hashtags')
+    $client.query('TRUNCATE table comments_hashtags')
+    $client.query('TRUNCATE table hashtags')
     $client.query("INSERT INTO users(username, email, bio) VALUES('aa', 'email@email.com', 'bio')")
   end
 
   after(:all) do
     $client.query('TRUNCATE table posts')
     $client.query('TRUNCATE table users')
+    $client.query('TRUNCATE table posts_hashtags')
+    $client.query('TRUNCATE table comments_hashtags')
+    $client.query('TRUNCATE table hashtags')
     $client.query('SET FOREIGN_KEY_CHECKS = 1')
   end
 
@@ -20,18 +26,18 @@ describe Post do
     context '.new' do
       it 'should create object' do
         params = {
-          id: 1,
-          user_id: 1,
-          text: 'post text #gigih',
-          attachment_path: '/public/aaa.png'
+          'id' => 1,
+          'user_id' => 1,
+          'text' => 'post text #gigih',
+          'attachment_path' => '/public/aaa.png'
         }
 
         post = Post.new(params)
 
-        expect(post.id).to eq(params[:id])
-        expect(post.user_id).to eq(params[:user_id])
-        expect(post.text).to eq(params[:text])
-        expect(post.attachment_path).to eq(params[:attachment_path])
+        expect(post.id).to eq(params['id'])
+        expect(post.user_id).to eq(params['user_id'])
+        expect(post.text).to eq(params['text'])
+        expect(post.attachment_path).to eq(params['attachment_path'])
       end
     end
   end
@@ -40,7 +46,7 @@ describe Post do
     context '#valid_id?' do
       it 'should valid positive integer' do
         params = {
-          id: 1
+          'id' => 1
         }
 
         post = Post.new(params)
@@ -50,7 +56,7 @@ describe Post do
 
       it 'should invalid negative integer' do
         params = {
-          id: -1
+          'id' => -1
         }
 
         post = Post.new(params)
@@ -60,7 +66,7 @@ describe Post do
 
       it 'should invalid nol integer' do
         params = {
-          id: 0
+          'id' => 0
         }
 
         post = Post.new(params)
@@ -70,7 +76,7 @@ describe Post do
 
       it 'should invalid if type is not integer' do
         params = {
-          id: 'aaa'
+          'id' => 'aaa'
         }
 
         post = Post.new(params)
@@ -82,7 +88,7 @@ describe Post do
     context '#valid_user_id?' do
       it 'should valid user_id' do
         params = {
-          user_id: 1
+          'user_id' => 1
         }
 
         post = Post.new(params)
@@ -92,7 +98,7 @@ describe Post do
 
       it 'should invalid negative integer' do
         params = {
-          user_id: -1
+          'user_id' => -1
         }
 
         post = Post.new(params)
@@ -102,7 +108,7 @@ describe Post do
 
       it 'should invalid nol integer' do
         params = {
-          user_id: 0
+          'user_id' => 0
         }
 
         post = Post.new(params)
@@ -112,7 +118,7 @@ describe Post do
 
       it 'should invalid if type is not integer' do
         params = {
-          user_id: 'aaa'
+          'user_id' => 'aaa'
         }
 
         post = Post.new(params)
@@ -124,7 +130,7 @@ describe Post do
     context '#valid_text?' do
       it 'should valid text' do
         params = {
-          text: 'aaa'
+          'text' => 'aaa'
         }
 
         post = Post.new(params)
@@ -134,7 +140,7 @@ describe Post do
 
       it 'should invalid empty string' do
         params = {
-          text: ''
+          'text' => ''
         }
 
         post = Post.new(params)
@@ -144,7 +150,7 @@ describe Post do
 
       it 'should invalid type not string' do
         params = {
-          text: 1
+          'text' => 1
         }
 
         post = Post.new(params)
@@ -154,7 +160,7 @@ describe Post do
 
       it 'should invalid exceed 1000 character' do
         params = {
-          text: 'a' * 1001
+          'text' => 'a' * 1001
         }
 
         post = Post.new(params)
@@ -166,9 +172,9 @@ describe Post do
     context '#valid_save?' do
       it 'should valid save' do
         params = {
-          user_id: 1,
-          text: 'post text #gigih',
-          attachment_path: '/public/aaa.png'
+          'user_id' => 1,
+          'text' => 'post text #gigih',
+          'attachment_path' => '/public/aaa.png'
         }
 
         post = Post.new(params)
@@ -178,8 +184,8 @@ describe Post do
 
       it 'should invalid save' do
         params = {
-          text: 'post text #gigih',
-          attachment_path: '/public/aaa.png'
+          'text' => 'post text #gigih',
+          'attachment_path' => '/public/aaa.png'
         }
 
         post = Post.new(params)
@@ -197,8 +203,8 @@ describe Post do
           { 'id' => 2, 'user_id' => 2, 'attachment_path' => '/bbb', 'created_at' => '2021-08-18 19:31:57', 'updated_at' => '2021-08-18 19:31:57' }
         ]
 
-        expected_post_1 = Post.new({ id: 1, user_id: 1, attachment_path: '/aaa', created_at: '2021-08-18 19:31:56', updated_at: '2021-08-18 19:31:56' })
-        expected_post_2 = Post.new({ id: 2, user_id: 2, attachment_path: '/bbb', created_at: '2021-08-18 19:31:57', updated_at: '2021-08-18 19:31:57' })
+        expected_post_1 = Post.new({ 'id' => 1, 'user_id' => 1, 'attachment_path' => '/aaa', 'created_at' => '2021-08-18 19:31:56', 'updated_at' => '2021-08-18 19:31:56' })
+        expected_post_2 = Post.new({ 'id' => 2, 'user_id' => 2, 'attachment_path' => '/bbb', 'created_at' => '2021-08-18 19:31:57', 'updated_at' => '2021-08-18 19:31:57' })
 
         actual_array = Post.convert_sql_result_to_array(sql_result)
         expected_array = [expected_post_1, expected_post_2]
@@ -226,28 +232,11 @@ describe Post do
 
   describe 'create' do
     context '#save' do
-      it 'should receive correct query' do
-        params = {
-          user_id: 1,
-          text: 'post text #gigih',
-          attachment_path: '/public/aaa.png'
-        }
-
-        post = Post.new(params)
-
-        mock_client = double
-        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
-        allow(mock_client).to receive(:last_id).and_return(1)
-
-        expect(mock_client).to receive(:query).with("INSERT INTO posts(user_id, text, attachment_path) VALUES (#{post.user_id}, '#{post.text}', '#{post.attachment_path}')")
-        expect(post.save).not_to be_nil
-      end
-
       it 'should save data to db' do
         params = {
-          user_id: 1,
-          text: 'post text #gigih',
-          attachment_path: '/public/aaa.png'
+          'user_id' => 1,
+          'text' => 'post text #gigih',
+          'attachment_path' => '/public/aaa.png'
         }
 
         post = Post.new(params)
@@ -258,9 +247,9 @@ describe Post do
 
         saved_user = result.first
 
-        expect(saved_user['user_id']).to eq(params[:user_id])
-        expect(saved_user['text']).to eq(params[:text])
-        expect(saved_user['attachment_path']).to eq(params[:attachment_path])
+        expect(saved_user['user_id']).to eq(params['user_id'])
+        expect(saved_user['text']).to eq(params['text'])
+        expect(saved_user['attachment_path']).to eq(params['attachment_path'])
       end
     end
   end
@@ -277,18 +266,18 @@ describe Post do
 
       it 'should get data from db' do
         params_1 = {
-          user_id: 1,
-          text: 'post text #gigih1',
-          attachment_path: '/public/aaa1.png'
+          'user_id' => 1,
+          'text' => 'post text #gigih1',
+          'attachment_path' => '/public/aaa1.png'
         }
 
         post_1 = Post.new(params_1)
         post_1.save
 
         params_2 = {
-          user_id: 1,
-          text: 'post text #gigih2',
-          attachment_path: '/public/aaa2.png'
+          'user_id' => 1,
+          'text' => 'post text #gigih2',
+          'attachment_path' => '/public/aaa2.png'
         }
 
         post_2 = Post.new(params_2)
@@ -298,14 +287,14 @@ describe Post do
         expect(result.size).to eq(2)
 
         result_1 = result[0]
-        expect(result_1.user_id).to eq(params_1[:user_id])
-        expect(result_1.text).to eq(params_1[:text])
-        expect(result_1.attachment_path).to eq(params_1[:attachment_path])
+        expect(result_1.user_id).to eq(params_1['user_id'])
+        expect(result_1.text).to eq(params_1['text'])
+        expect(result_1.attachment_path).to eq(params_1['attachment_path'])
 
         result_2 = result[1]
-        expect(result_2.user_id).to eq(params_2[:user_id])
-        expect(result_2.text).to eq(params_2[:text])
-        expect(result_2.attachment_path).to eq(params_2[:attachment_path])
+        expect(result_2.user_id).to eq(params_2['user_id'])
+        expect(result_2.text).to eq(params_2['text'])
+        expect(result_2.attachment_path).to eq(params_2['attachment_path'])
       end
     end
 
@@ -322,18 +311,50 @@ describe Post do
 
       it 'should get data from db' do
         params = {
-          user_id: 1,
-          text: 'post text #gigih',
-          attachment_path: '/public/aaa.png'
+          'user_id' => 1,
+          'text' => 'post text #gigih',
+          'attachment_path' => '/public/aaa.png'
         }
 
         post = Post.new(params)
         post.save
 
         result = Post.find_by_id(1)
-        expect(result.user_id).to eq(params[:user_id])
-        expect(result.text).to eq(params[:text])
-        expect(result.attachment_path).to eq(params[:attachment_path])
+        expect(result.user_id).to eq(params['user_id'])
+        expect(result.text).to eq(params['text'])
+        expect(result.attachment_path).to eq(params['attachment_path'])
+      end
+    end
+
+    context '.find_posts_contain_hashtag' do
+      it 'should return post containing hashtag' do
+        params_1 = {
+          'user_id' => 1,
+          'text' => 'post text #gigih',
+          'attachment_path' => '/public/aaa1.png'
+        }
+
+        post_1 = Post.new(params_1)
+        post_1.save
+
+        params_2 = {
+          'user_id' => 1,
+          'text' => 'post text #gigih',
+          'attachment_path' => '/public/aaa2.png'
+        }
+
+        post_2 = Post.new(params_2)
+        post_2.save
+
+        result = Post.find_posts_contain_hashtag('gigih')
+        expect(result.size).to eq(2)
+
+        actual_post_1 = result[0]
+        actual_post_2 = result[1]
+
+        expect(post_1.text).to eq(actual_post_1.text)
+        expect(post_2.text).to eq(actual_post_2.text)
+        expect(actual_post_1.text).to eq(actual_post_2.text)
       end
     end
   end

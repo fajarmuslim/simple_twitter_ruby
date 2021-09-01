@@ -2,16 +2,29 @@ class Comment_Hashtag
   attr_reader :id, :comment_id, :hashtag_id
 
   def initialize(params)
-    @id = params[:id]
-    @comment_id = params[:comment_id]
-    @hashtag_id = params[:hashtag_id]
+    @id = params['id']
+    @comment_id = params['comment_id']
+    @hashtag_id = params['hashtag_id']
+  end
+
+  def valid_comment_id?
+    return false unless @comment_id.is_a? Integer
+    return false if @comment_id.negative? || @comment_id.zero?
+    return false if @comment_id.nil?
+
+    true
+  end
+
+  def valid_hashtag_id?
+    return false unless @hashtag_id.is_a? Integer
+    return false if @hashtag_id.negative? || @hashtag_id.zero?
+    return false if @hashtag_id.nil?
+
+    true
   end
 
   def valid_save?
-    return false if comment_id.nil? || hashtag_id.nil?
-    return false if comment_id.negative? || hashtag_id.negative?
-
-    true
+    valid_comment_id? and valid_hashtag_id?
   end
 
   def save
@@ -26,8 +39,8 @@ class Comment_Hashtag
     string_hashtags.each do |string_hashtag|
       hashtag_id = Hashtag.find_hashtag_id_from_string_hashtag(string_hashtag)
       params = {
-        comment_id: comment_id,
-        hashtag_id: hashtag_id
+        'comment_id' => comment_id,
+        'hashtag_id' => hashtag_id
       }
 
       comment_hashtag = Comment_Hashtag.new(params)
@@ -41,9 +54,9 @@ class Comment_Hashtag
 
     sql_result.each do |row|
       comment_hashtag = Comment_Hashtag.new(
-        id: row['id'],
-        comment_id: row['comment_id'],
-        hashtag_id: row['hashtag_id']
+        'id' => row['id'],
+        'comment_id' => row['comment_id'],
+        'hashtag_id' => row['hashtag_id']
       )
       comments_hashtags << comment_hashtag
     end

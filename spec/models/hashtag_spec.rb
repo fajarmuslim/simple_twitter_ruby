@@ -17,14 +17,14 @@ describe Hashtag do
     context '.new' do
       it 'should create object' do
         params = {
-          id: 1,
-          text: 'ppkm'
+          'id'=> 1,
+          'text'=> 'ppkm'
         }
 
         hashtag = Hashtag.new(params)
 
-        expect(hashtag.id).to eq(params[:id])
-        expect(hashtag.text).to eq(params[:text])
+        expect(hashtag.id).to eq(params['id'])
+        expect(hashtag.text).to eq(params['text'])
       end
     end
   end
@@ -33,7 +33,7 @@ describe Hashtag do
     context '#valid_id?' do
       it 'should valid positive integer' do
         params = {
-          id: 1
+          'id'=> 1
         }
 
         hashtag = Hashtag.new(params)
@@ -43,7 +43,7 @@ describe Hashtag do
 
       it 'should invalid negative integer' do
         params = {
-          id: -1
+          'id'=> -1
         }
 
         hashtag = Hashtag.new(params)
@@ -53,7 +53,7 @@ describe Hashtag do
 
       it 'should invalid nol integer' do
         params = {
-          id: 0
+          'id'=> 0
         }
 
         hashtag = Hashtag.new(params)
@@ -63,7 +63,7 @@ describe Hashtag do
 
       it 'should invalid if type is not integer' do
         params = {
-          id: 'aaa'
+          'id'=> 'aaa'
         }
 
         hashtag = Hashtag.new(params)
@@ -75,7 +75,7 @@ describe Hashtag do
     context '#valid_text?' do
       it 'should valid text' do
         params = {
-          text: 'ppkm'
+          'text'=> 'ppkm'
         }
 
         hashtag = Hashtag.new(params)
@@ -85,7 +85,7 @@ describe Hashtag do
 
       it 'should invalid empty string' do
         params = {
-          text: ''
+          'text'=> ''
         }
 
         hashtag = Hashtag.new(params)
@@ -95,7 +95,7 @@ describe Hashtag do
 
       it 'should invalid type not string' do
         params = {
-          text: 1
+          'text'=> 1
         }
 
         hashtag = Hashtag.new(params)
@@ -105,7 +105,7 @@ describe Hashtag do
 
       it 'should invalid exceed 999 character' do
         params = {
-          text: 'a' * 1000
+          'text'=> 'a' * 1000
         }
 
         hashtag = Hashtag.new(params)
@@ -117,7 +117,7 @@ describe Hashtag do
     context '#valid_save?' do
       it 'should valid save' do
         params = {
-          text: 'aaa'
+          'text'=> 'aaa'
         }
 
         hashtag = Hashtag.new(params)
@@ -127,7 +127,7 @@ describe Hashtag do
 
       it 'should invalid save' do
         params = {
-          text: ''
+          'text'=> ''
         }
 
         hashtag = Hashtag.new(params)
@@ -145,11 +145,12 @@ describe Hashtag do
           { 'id' => 2, 'text' => 'bbb' }
         ]
 
-        expected_hashtag_1 = Hashtag.new({ id: 1, text: 'aaa' })
-        expected_hashtag_2 = Hashtag.new({ id: 2, text: 'bbb' })
+        expected_hashtag_1 = Hashtag.new({ 'id'=> 1, 'text'=> 'aaa' })
+        expected_hashtag_2 = Hashtag.new({ 'id'=> 2, 'text'=> 'bbb' })
 
         actual_array = Hashtag.convert_sql_result_to_array(sql_result)
         expected_array = [expected_hashtag_1, expected_hashtag_2]
+
 
         expect(expected_array.size).to eq(actual_array.size)
         (0..expected_array.size - 1).each do |i|
@@ -173,7 +174,7 @@ describe Hashtag do
     context '#save' do
       it 'should receive correct query' do
         params = {
-          text: 'fajar'
+          'text'=> 'fajar'
         }
 
         hashtag = Hashtag.new(params)
@@ -188,7 +189,7 @@ describe Hashtag do
 
       it 'should save data to db' do
         params = {
-          text: 'fajar'
+          'text'=> 'fajar'
         }
 
         hashtag = Hashtag.new(params)
@@ -199,7 +200,7 @@ describe Hashtag do
 
         saved_hashtag = result.first
 
-        expect(saved_hashtag['text']).to eq(params[:text])
+        expect(saved_hashtag['text']).to eq(params['text'])
       end
     end
   end
@@ -216,14 +217,14 @@ describe Hashtag do
 
       it 'should get data from db' do
         params_1 = {
-          text: 'aaa'
+          'text'=> 'aaa'
         }
 
         hashtag_1 = Hashtag.new(params_1)
         hashtag_1.save
 
         params_2 = {
-          text: 'bbb'
+          'text'=> 'bbb'
         }
 
         hashtag_2 = Hashtag.new(params_2)
@@ -233,10 +234,10 @@ describe Hashtag do
         expect(result.size).to eq(2)
 
         result_1 = result[0]
-        expect(result_1.text).to eq(params_1[:text])
+        expect(result_1.text).to eq(params_1['text'])
 
         result_2 = result[1]
-        expect(result_2.text).to eq(params_2[:text])
+        expect(result_2.text).to eq(params_2['text'])
       end
     end
     context '#find_by_id' do
@@ -252,14 +253,14 @@ describe Hashtag do
 
       it 'should get data from db' do
         params = {
-          text: 'aaa'
+          'text'=> 'aaa'
         }
 
         hashtag = Hashtag.new(params)
         hashtag.save
 
         result = Hashtag.find_by_id(1)
-        expect(result.text).to eq(params[:text])
+        expect(result.text).to eq(params['text'])
       end
     end
   end

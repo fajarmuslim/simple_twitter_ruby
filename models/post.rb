@@ -5,12 +5,12 @@ class Post
   attr_reader :id, :user_id, :text, :attachment_path, :created_at, :updated_at
 
   def initialize(params)
-    @id = params[:id]
-    @user_id = params[:user_id]
-    @text = params[:text]
-    @attachment_path = params[:attachment_path]
-    @created_at = params[:created_at]
-    @updated_at = params[:updated_at]
+    @id = params['id']
+    @user_id = params['user_id']
+    @text = params['text']
+    @attachment_path = params['attachment_path']
+    @created_at = params['created_at']
+    @updated_at = params['updated_at']
   end
 
   def valid_id?
@@ -45,12 +45,12 @@ class Post
 
     sql_result.each do |row|
       post = Post.new(
-        id: row['id'],
-        user_id: row['user_id'],
-        text: row['text'],
-        attachment_path: row['attachment_path'],
-        created_at: row['created_at'],
-        updated_at: row['updated_at']
+        'id' => row['id'],
+        'user_id' => row['user_id'],
+        'text' => row['text'],
+        'attachment_path' => row['attachment_path'],
+        'created_at' => row['created_at'],
+        'updated_at' => row['updated_at']
       )
       posts << post
     end
@@ -88,13 +88,14 @@ class Post
     hashtag_id = result.id unless result.nil?
 
     post_ids = Post_Hashtag.find_post_ids(hashtag_id)
+
+
     find_post_from_post_ids(post_ids)
   end
 
   def self.find_post_from_post_ids(post_ids)
     posts = []
     post_ids.each do |post_id|
-      puts "post_id: #{post_id}"
       posts << Post.find_by_id(post_id)
     end
     posts

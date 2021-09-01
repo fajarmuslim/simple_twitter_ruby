@@ -3,12 +3,14 @@ require_relative '../constant/status_code'
 
 class UserController
   def self.create(params)
+    data = nil
     begin
       raise 'username field required' if params['username'] == '' || params['username'].nil?
       raise 'email field required' if params['email'] == '' || params['email'].nil?
 
       user = User.new(params)
       id = user.save
+
       if id
         status = CREATED
         message = 'success created user'
